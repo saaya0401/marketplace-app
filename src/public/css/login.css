@@ -1,0 +1,68 @@
+.login__content {
+    margin: 50px auto;
+    text-align: center;
+    width: 45%;
+}
+
+@media screen and (max-width: 850px) {
+    .login__content {
+        width: 70%;
+    }
+}
+
+.login-form__heading h2 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.form {
+    margin: 50px 0 30px;
+    text-align: left;
+}
+
+.form__group {
+    margin-bottom: 25px;
+}
+
+.form__label--item {
+    font-weight: 700;
+}
+
+.form__input--text input {
+    width: 100%;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+.form__error{
+    color: #FF5555;
+    padding-top: 5px;
+}
+
+.form__button-submit {
+    background-color: #FF5555;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 26px;
+    font-weight: 700;
+    padding: 10px;
+}
+
+.form__button {
+    margin-top: 100px;
+}
+
+.form__group-title {
+    padding: 5px 0;
+}
+
+.register__button-submit {
+    color: #0073CC;
+    text-decoration: none;
+    font-size: 20px;
+}

@@ -1,0 +1,17 @@
+* {
+    font-size: 24px;
+    font-weight: 400;
+    color: #000;
+}
+
+.header {
+    background-color: #000;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-inner {
+    padding: 15px;
+}
