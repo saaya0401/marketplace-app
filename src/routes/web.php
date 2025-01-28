@@ -9,4 +9,5 @@ Route::post('/login', [UserController::class, 'login']);
 Route::get('/', [ItemController::class, 'index']);
 Route::middleware('auth')->group(function (){
     Route::post('/logout', [UserController::class, 'logout']);
+    Route::get('/profile', [ItemController::class, 'profile']);
 });

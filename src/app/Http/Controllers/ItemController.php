@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
     public function index(){
         return view('index');
+    }
+    public function profile(){
+        $user=Auth::user();
+        return view('profile', compact('user'));
     }
 }
