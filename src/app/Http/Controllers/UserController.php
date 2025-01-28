@@ -17,7 +17,7 @@ class UserController extends Controller
         $validated['password']=Hash::make($validated['password']);
         $user=User::create($validated);
         Auth::login($user);
-        return view('profile');
+        return redirect('/profile');
     }
 
     public function login(LoginRequest $request){
