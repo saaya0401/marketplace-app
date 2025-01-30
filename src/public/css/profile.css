@@ -25,6 +25,10 @@
     padding: 10px;
 }
 
+.form-error{
+    color: #FF5555;
+}
+
 .form-button__submit {
     border-radius: 5px;
     width: 100%;
@@ -58,11 +62,14 @@
     opacity: 0;
 }
 
-.profile__image-area {
+.profile__image-area{
+    margin-bottom: 50px;
+}
+
+.profile__image-area--inner {
     display: flex;
     justify-content: left;
     align-items: center;
-    margin-bottom: 50px;
 }
 
 .profile-image__label {

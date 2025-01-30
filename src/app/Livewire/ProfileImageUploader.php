@@ -12,10 +12,15 @@ class ProfileImageUploader extends Component
     public $imageName;
     public $imageUrl;
 
+    public function mount(){
+        $this->imageUrl=session('profile_image', auth()->user()->profile_image);
+    }
+
     public function updatedProfileImage(){
         if ($this->profileImage) {
             $this->imageName = $this->profileImage->getClientOriginalName();
             $this->imageUrl = $this->profileImage->storeAs('profile-img', $this->imageName, 'public');
+            session(['profile_image'=>$this->imageUrl]);
         }
     }
 
