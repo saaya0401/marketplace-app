@@ -10,8 +10,6 @@ class ItemController extends Controller
     public function index(){
         return view('index');
     }
-    public function profile(){
-        $user=Auth::user();
-        return view('profile', compact('user'));
-    }
+
+    
 }

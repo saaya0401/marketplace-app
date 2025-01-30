@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\ProfileRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -18,6 +20,18 @@ class UserController extends Controller
         $user=User::create($validated);
         Auth::login($user);
         return redirect('/profile');
+    }
+
+    public function profile(){
+        $user=Auth::user();
+        return view('profile', compact('user'));
+    }
+
+    public function profileStore(ProfileRequest $request){
+        $profile=$request->only(['profile_image', 'postal_code', 'address', 'building']);
+        $profile['user_id']=Auth::id();
+        Profile::create($profile);
+        return view('index');
     }
 
     public function login(LoginRequest $request){
