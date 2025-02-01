@@ -4,12 +4,6 @@
     width: 45%;
 }
 
-@media screen and (max-width: 850px) {
-    .login__content {
-        width: 70%;
-    }
-}
-
 .login-form__heading h2 {
     margin: 0;
     font-size: 36px;
@@ -65,4 +59,10 @@
     color: #0073CC;
     text-decoration: none;
     font-size: 20px;
+}
+
+@media screen and (max-width: 850px) {
+    .login__content {
+        width: 70%;
+    }
 }

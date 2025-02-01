@@ -31,7 +31,7 @@ class UserController extends Controller
         $profile=$request->only(['profile_image', 'postal_code', 'address', 'building']);
         $profile['user_id']=Auth::id();
         Profile::create($profile);
-        return view('index');
+        return redirect('/');
     }
 
     public function login(LoginRequest $request){
@@ -41,7 +41,7 @@ class UserController extends Controller
                 'email'=>'ログイン情報が登録されていません'
             ]);
         }
-        return view('index');
+        return redirect('/');
     }
 
     public function logout(){

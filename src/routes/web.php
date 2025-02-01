@@ -7,6 +7,7 @@ use App\Http\Controllers\ItemController;
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 Route::get('/', [ItemController::class, 'index']);
+Route::get('/item/{itemId}', [ItemController::class, 'detail']);
 Route::middleware('auth')->group(function (){
     Route::post('/logout', [UserController::class, 'logout']);
     Route::get('/profile', [UserController::class, 'profile']);
