@@ -39,7 +39,6 @@ class ItemController extends Controller
     public function detail($itemId){
         $item=Item::find($itemId);
         $categories=Category::all();
-        $selectedCategories=$item->categories->pluck('id')->toArray();
-        return view('detail', compact('item', 'selectedCategories', 'categories'));
+        return view('detail', compact('item', 'categories'));
     }
 }
