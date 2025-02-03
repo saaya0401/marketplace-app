@@ -19,4 +19,10 @@ class Item extends Model
     public function categories(){
         return $this->belongsToMany(Category::class);
     }
+
+    public function scopeKeywordSearch($query, $keyword){
+        if(!empty($keyword)){
+            $query->where('title', 'like', '%' . $keyword . '%');
+        }
+    }
 }

@@ -16,9 +16,13 @@
                 <img src="{{asset('icon/Vector.png')}}" alt="アイコン" class="header__logo-icon">
                 <img src="{{asset('icon/COACHTECH.png')}}" alt="COACHTECH" class="header__logo-title">
             </div>
-            <div class="header-title">
-                <span class="header-title__text">なにをお探しですか？</span>
-            </div>
+            <form class="header-search__form" method="get" action="/item/search">
+                @csrf
+                <input type="text" name="keyword" placeholder="なにをお探しですか？" value="{{old('keyword', request('keyword'))}}" class="header-search__form--input">
+                <div class="header-search__form--button">
+                    <button class="header-search__form--button-submit" type="submit">検索</button>
+                </div>
+            </form>
             <nav>
                 <ul class="header-nav">
                     <li class="header-nav__item">
