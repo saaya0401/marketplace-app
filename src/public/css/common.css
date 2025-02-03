@@ -23,16 +23,33 @@
     margin: 0;
 }
 
-.header-title {
-    width: 500px;
-    background-color: #fff;
-    border: none;
-    border-radius: 5px;
+.header-search__form {
     height: 50px;
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
+}
+
+.header-search__form--input {
+    height: 100%;
+    border: none;
     padding: 0 50px;
+    background-color: #fff;
+    border-radius: 5px 0 0 5px;
+}
+
+.header-search__form--button-submit {
+    height: 100%;
+    border: none;
+    background-color: #ff0000;
+    color: #fff;
+    cursor: pointer;
+    padding: 0 20px;
+    border-radius: 0 5px 5px 0;
+}
+
+.header-search__form--button {
+    height: 100%;
 }
 
 .header-nav__button {
