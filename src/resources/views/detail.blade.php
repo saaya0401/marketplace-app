@@ -13,7 +13,7 @@
         <div class="item-title">
             <h1 class="item-title__name">{{$item['title']}}</h1>
             <h6 class="item-title__brand">{{$item['user']['name']}}</h6>
-            <h3 class="item-title__price">&yen;{{$item['price']}}（税込）</h3>
+            <h3 class="item-title__price">&yen;<span class="item-price__number">{{$item['price']}}</span>（税込）</h3>
         </div>
         <div class="item-actions">
             <div class="item-actions__icons">
@@ -54,8 +54,10 @@
             <div class="item-comments">
                 <h2 class="item-comments__title">コメント(1)</h2>
                 <div class="item-comments__list">
-                    <div class="item-comments__user-profile"></div>
-                    <div class="item-comments__user-name">admin</div>
+                    <div class="item-comments__list-profile">
+                        <div class="item-comments__user-profile"></div>
+                        <div class="item-comments__user-name">admin</div>
+                    </div>
                     <div class="item-comments__text">
                         こちらにコメントが入ります
                     </div>
