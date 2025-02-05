@@ -4,12 +4,6 @@
     width: 45%;
 }
 
-@media screen and (max-width: 850px){
-    .register__content{
-        width: 70%;
-    }
-}
-
 .register-form__heading h2 {
     margin: 0;
     font-size: 36px;
@@ -65,4 +59,16 @@
     color: #0073CC;
     text-decoration: none;
     font-size: 20px;
+}
+
+@media screen and (max-width: 850px) {
+    * {
+        font-size: 24px;
+        font-weight: 400;
+        color: #000;
+    }
+
+    .register__content {
+        width: 70%;
+    }
 }
