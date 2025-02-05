@@ -11,8 +11,10 @@
     </div>
     <div class="detail-content">
         <div class="item-title">
-            <h1 class="item-title__name">{{$item['title']}}</h1>
-            <h6 class="item-title__brand">{{$item['user']['name']}}</h6>
+            <div class="item-title__name-user">
+                <h1 class="item-title__name">{{$item['title']}}</h1>
+                <h6 class="item-title__brand">{{$item['user']['name']}}</h6>
+            </div>
             <h3 class="item-title__price">&yen;<span class="item-price__number">{{$item['price']}}</span>（税込）</h3>
         </div>
         <div class="item-actions">

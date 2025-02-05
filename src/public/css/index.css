@@ -63,6 +63,12 @@
 }
 
 @media screen and (max-width: 850px) {
+    * {
+        font-size: 24px;
+        font-weight: 400;
+        color: #000;
+    }
+
     .tab-area {
         margin-top: 10px;
     }
