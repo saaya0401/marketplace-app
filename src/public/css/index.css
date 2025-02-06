@@ -25,17 +25,15 @@
 }
 
 .content {
-    margin: 50px 30px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
+    margin: 50px auto 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .item-card__form {
     width: 290px;
     height: 320px;
-    margin-bottom: 50px;
+    margin:0 auto 50px;
 }
 
 .item-card__img {
@@ -69,6 +67,10 @@
         color: #000;
     }
 
+    .content {
+        margin: 30px auto 0;
+        grid-template-columns: 1fr 1fr;
+    }
     .tab-area {
         margin-top: 10px;
     }

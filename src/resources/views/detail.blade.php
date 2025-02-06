@@ -24,7 +24,7 @@
             </div>
             <div class="item-actions__counts">
                 <small class="item-actions__count--mylist">3</small>
-                <small class="item-actions__count--comment">1</small>
+                <small class="item-actions__count--comment">{{$commentCount}}</small>
             </div>
         </div>
         <form class="item-purchase__form" action="{{url('/purchase/' . $item['id'])}}" method="get">
@@ -54,22 +54,34 @@
                 </tr>
             </table>
             <div class="item-comments">
-                <h2 class="item-comments__title">コメント(1)</h2>
+                <h2 class="item-comments__title">コメント({{$commentCount}})</h2>
+                @foreach($comments as $comment)
                 <div class="item-comments__list">
                     <div class="item-comments__list-profile">
-                        <div class="item-comments__user-profile"></div>
-                        <div class="item-comments__user-name">admin</div>
+                        <div class="item-comments__user-profile">
+                            <img src="{{Storage::url($comment->profile->profile_image)}}" alt="" class="item-comments__profile--image">
+
+                        </div>
+                        <div class="item-comments__user-name">
+                            {{$comment->profile->user->name}}
+                        </div>
                     </div>
                     <div class="item-comments__text">
-                        こちらにコメントが入ります
+                        {{$comment['content']}}
                     </div>
                 </div>
+                @endforeach
                 <div class="item-comment__input-area">
                     <h3 class="item-comment__input-title">商品へのコメント</h3>
                     <form action="{{url('/comment/' . $item['id'])}}" method="post" class="item-comment__form">
                         @csrf
                         <textarea name="content" class="item-comment__textarea">{{old('content')}}</textarea>
                         <button class="item-comment__button" type="submit">コメントを送信する</button>
+                        <div class="form-error">
+                            @error('content')
+                            {{$message}}
+                            @enderror
+                        </div>
                     </form>
                 </div>
             </div>

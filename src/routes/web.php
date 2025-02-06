@@ -12,5 +12,7 @@ Route::middleware('auth')->group(function (){
     Route::post('/logout', [UserController::class, 'logout']);
     Route::get('/profile', [UserController::class, 'profile']);
     Route::post('/profile', [UserController::class, 'profileStore']);
+    Route::get('/purchase/{itemId}', [ItemController::class, 'purchaseView']);
+    Route::post('/comment/{itemId}', [ItemController::class, 'comment']);
 });
 Route::get('/item/{itemId}', [ItemController::class, 'detail']);
