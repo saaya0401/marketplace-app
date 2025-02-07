@@ -19,11 +19,16 @@
         </div>
         <div class="item-actions">
             <div class="item-actions__icons">
-                <img src="{{asset('icon/star.png')}}" alt="星のアイコン" class="item-actions__icon--star">
+                <form action="{{url('/mylist/' . $item['id'])}}" method="post" class="item-mylist__form">
+                    @csrf
+                    <button class="item-mylist__form--button" type="submit">
+                        <img src="{{asset($isMylisted ? 'icon/star-yellow.png' : 'icon/star.png' )}}" alt="星のアイコン" class="item-actions__icon--star">
+                    </button>
+                </form>
                 <img src="{{asset('icon/chat.png')}}" alt="吹き出しのアイコン" class="item-actions__icon--chat">
             </div>
             <div class="item-actions__counts">
-                <small class="item-actions__count--mylist">3</small>
+                <small class="item-actions__count--mylist">{{$mylistCount}}</small>
                 <small class="item-actions__count--comment">{{$commentCount}}</small>
             </div>
         </div>
