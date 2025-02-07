@@ -14,5 +14,6 @@ Route::middleware('auth')->group(function (){
     Route::post('/profile', [UserController::class, 'profileStore']);
     Route::get('/purchase/{itemId}', [ItemController::class, 'purchaseView']);
     Route::post('/comment/{itemId}', [ItemController::class, 'comment']);
+    Route::post('/mylist/{itemId}', [ItemController::class, 'mylist']);
 });
 Route::get('/item/{itemId}', [ItemController::class, 'detail']);

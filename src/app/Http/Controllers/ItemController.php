@@ -19,9 +19,9 @@ class ItemController extends Controller
         if($tab==='mylist'){
             $items=Mylist::where('user_id', $user_id)->whereHas('item', function($query) use ($user_id) {
                 $query->where('user_id', '!=', $user_id);
-            })->with('categories')->get();
+            })->with('item')->get();
         }else{
-            $items=Item::where('user_id', '!=', $user_id)->with('categories')->get();
+            $items=Item::where('user_id', '!=', $user_id)->get();
         }
         return view('index', compact('items', 'tab'));
     }
@@ -41,10 +41,13 @@ class ItemController extends Controller
 
     public function detail($itemId){
         $item=Item::find($itemId);
+        $user_id=Auth::id();
         $categories=Category::all();
+        $isMylisted=Mylist::where('item_id', $itemId)->where('user_id', $user_id)->exists();
+        $mylistCount=Mylist::where('item_id', $itemId)->where('user_id', $user_id)->count();
         $commentCount=Comment::where('item_id', $itemId)->count();
         $comments=Comment::with(['profile.user'])->where('item_id', $itemId)->get();
-        return view('detail', compact('item', 'categories', 'commentCount', 'comments'));
+        return view('detail', compact('item', 'categories', 'isMylisted', 'mylistCount', 'commentCount', 'comments'));
     }
 
     public function purchaseView($itemId){
@@ -62,6 +65,20 @@ class ItemController extends Controller
             'profile_id'=>$profile->id,
             'content'=>$request->input('content')
         ]);
+        return redirect('/item/' . $itemId);
+    }
+
+    public function mylist(Request $request, $itemId){
+        $user_id=Auth::id();
+        $mylist=Mylist::where('item_id', $itemId)->where('user_id', $user_id)->first();
+        if($mylist){
+            $mylist->delete();
+        }else{
+            Mylist::create([
+                'item_id'=>$itemId,
+                'user_id'=>$user_id
+            ]);
+        }
         return redirect('/item/' . $itemId);
     }
 }
