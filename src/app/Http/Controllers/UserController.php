@@ -50,4 +50,8 @@ class UserController extends Controller
         session()->regenerateToken();
         return redirect('/');
     }
+
+    public function address(){
+        return view('address');
+    }
 }

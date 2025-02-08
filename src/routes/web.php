@@ -13,6 +13,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/profile', [UserController::class, 'profile']);
     Route::post('/profile', [UserController::class, 'profileStore']);
     Route::get('/purchase/{itemId}', [ItemController::class, 'purchaseView']);
+    Route::get('/purchase/address/{itemId}', [UserController::class, 'address']);
     Route::post('/comment/{itemId}', [ItemController::class, 'comment']);
     Route::post('/mylist/{itemId}', [ItemController::class, 'mylist']);
 });

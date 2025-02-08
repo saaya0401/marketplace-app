@@ -53,7 +53,7 @@ class ItemController extends Controller
     public function purchaseView($itemId){
         $item=Item::find($itemId);
         $user_id=Auth::id();
-        $profile=Profile::where('user_id', $user_id)->get();
+        $profile=Profile::where('user_id', $user_id)->first();
         return view('purchase', compact('item', 'profile'));
     }
 
