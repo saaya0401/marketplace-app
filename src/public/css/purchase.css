@@ -1,8 +1,11 @@
 .purchase-form {
+    margin-top: 70px;
+}
+
+.purchase-content {
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
-    margin-top: 70px;
 }
 
 .purchase-info {
