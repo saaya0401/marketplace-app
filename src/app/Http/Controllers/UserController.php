@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\AddressRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Item;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -51,7 +53,15 @@ class UserController extends Controller
         return redirect('/');
     }
 
-    public function address(){
-        return view('address');
+    public function address($itemId){
+        $item=Item::find($itemId);
+        return view('address', compact('item'));
+    }
+
+    public function addressChange(AddressRequest $request, $itemId){
+        $item=Item::find($itemId);
+        $profile=$request->only(['user_id', 'postal_code', 'address', 'building']);
+        Profile::where('user_id', Auth::id())->update($profile);
+        return redirect('/purchase/' . $itemId);
     }
 }

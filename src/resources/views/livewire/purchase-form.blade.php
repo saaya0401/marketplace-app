@@ -1,4 +1,6 @@
-<div class="purchase-content">
+<form class="purchase-form" method="post" action="{{url('/purchase/' . $item['id'])}}">
+    @csrf
+    <div class="purchase-content">
     <div class="purchase-info">
         <div class="purchase-info__item">
             <div class="purchase-item__image">
@@ -17,6 +19,11 @@
                     <option value="コンビニ払い">コンビニ払い</option>
                     <option value="カード払い">カード払い</option>
                 </select>
+                <div class="purchase-form__error">
+                    @error('payment_method')
+                    {{$message}}
+                    @enderror
+                </div>
             </div>
         </div>
         <div class="purchase-info__address">
@@ -29,7 +36,7 @@
                     〒 {{$profile->postal_code}}
                 </div>
                 <div class="purchase-address__address-building">
-                    {{$profile->address}}{{$profile->building}}
+                    {{$profile->address}} {{$profile->building}}
                 </div>
             </div>
         </div>
@@ -47,8 +54,11 @@
                 </td>
             </tr>
         </table>
+        <input type="hidden" name="profile_id" value="{{Auth::user()->profile->id}}">
         <div class="purchase-confirm__button">
-            <button class="purchase-confirm__button-submit" type="submit">購入する</button>
+            <button type="submit" class="purchase-confirm__button-submit">購入する</button>
         </div>
     </div>
 </div>
+
+</form>
