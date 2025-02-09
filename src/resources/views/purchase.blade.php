@@ -14,7 +14,7 @@
             </div>
             <div class="purchase-item__header">
                 <h2 class="purchase-item__title">{{$item->title}}</h2>
-                <div class="purchase-item__price">&yen; {{$item->formatted_price}}</div>
+                <div class="purchase-item__price"><span class="purchase-item__price-yen">&yen;</span>{{$item->formatted_price}}</div>
             </div>
         </div>
         <div class="purchase-info__method">
@@ -46,7 +46,7 @@
         <table class="purchase-confirm__table">
             <tr class="purchase-confirm__table-row">
                 <th class="purchase-confirm__table-header">商品代金</th>
-                <td class="purchase-confirm__table-description">&yen; {{$item->formatted_price}}</td>
+                <td class="purchase-confirm__table-price"><span class="purchase-confirm__table-price--yen">&yen;</span>{{$item->formatted_price}}</td>
             </tr>
             <tr class="purchase-confirm__table-row">
                 <th class="purchase-confirm__table-header">支払い方法</th>
