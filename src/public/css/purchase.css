@@ -1,0 +1,218 @@
+.purchase-form {
+    margin-top: 70px;
+}
+
+.purchase-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.purchase-info {
+    width: 50vw;
+}
+
+.purchase-info__item {
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    border-bottom: 1px solid #000;
+    padding-bottom: 50px;
+}
+
+.purchase-item__image {
+    width: 25%;
+    margin-right: 50px;
+}
+
+.purchase-item__img {
+    width: 100%;
+}
+
+.purchase-item__title {
+    margin: 0;
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.purchase-item__price {
+    font-size: 32px;
+    margin-top: 20px;
+}
+
+.purchase-item__price-yen {
+    font-size: 27px;
+    padding-right: 5px;
+}
+
+.purchase-info__method {
+    margin: 40px 0;
+    padding-bottom: 50px;
+    border-bottom: 1px solid #000;
+}
+
+.purchase-method__title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0 50px 30px;
+}
+
+.purchase-method__select-area {
+    width: 40%;
+    margin-left: 100px;
+    position: relative;
+    height: 40px;
+}
+
+.purchase-method__select-area::after {
+    position: absolute;
+    content: "";
+    background: url(../icon/Polygon1.png) no-repeat;
+    background-size: cover;
+    width: 13px;
+    height: 11px;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+.purchase-method__select {
+    color: #5F5F5F;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    width: 100%;
+    appearance: none;
+    cursor: pointer;
+    height: 100%;
+}
+
+.purchase-form__error {
+    color: #ff5555;
+    padding-top: 5px;
+    font-size: 18px;
+}
+
+.purchase-info__address--header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 50px;
+}
+
+.purchase-info__address {
+    border-bottom: 1px solid #000;
+    padding-bottom: 50px;
+}
+
+.purchase-address__title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    padding-left: 50px;
+}
+
+.purchase-address__edit {
+    color: #0073CC;
+    text-decoration: none;
+    font-size: 20px;
+    padding-right: 50px;
+}
+
+.purchase-address {
+    padding-left: 100px;
+}
+
+.purchase-address__postal_code {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.purchase-address__address-building {
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.purchase-confirm {
+    width: 30%;
+}
+
+.purchase-confirm__table {
+    width: 100%;
+    border: 1px solid #000;
+}
+
+.purchase-confirm__table-header {
+    font-size: 20px;
+    padding: 40px;
+    width: 50%;
+}
+
+.purchase-confirm__table-price {
+    font-size: 28px;
+    text-align: center;
+}
+
+.purchase-confirm__table-price--yen {
+    font-size: 24px;
+    padding-right: 5px;
+}
+
+.purchase-confirm__table-description {
+    font-size: 24px;
+    text-align: center;
+}
+
+.purchase-confirm__table-row:first-child {
+    border-bottom: 1px solid #000;
+}
+
+.purchase-confirm__button {
+    margin-top: 100px;
+}
+
+.purchase-confirm__button-submit {
+    width: 100%;
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #ff5555;
+    border: none;
+    border-radius: 5px;
+}
+
+@media screen and (max-width:850px) {
+    .purchase-form {
+        margin-top: 30px;
+    }
+    .purchase-content {
+        display: block;
+        margin: 0 auto;
+        width: 80%;
+    }
+    .purchase-info {
+        width: 100%;
+    }
+    .purchase-info__item {
+        display: flex;
+        justify-content: left;
+        align-items: flex-start;
+        padding-left: 50px;
+    }
+        .purchase-method__select-area {
+        width: 50%;
+    }
+    .purchase-confirm {
+        width: 80%;
+        margin: 50px auto;
+    }
+    .purchase-confirm__button {
+        margin-top: 50px;
+    }
+}

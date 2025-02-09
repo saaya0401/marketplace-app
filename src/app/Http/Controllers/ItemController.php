@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
+use App\Http\Requests\PurchaseRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Mylist;
 use App\Models\Item;
 use App\Models\Category;
 use App\Models\Profile;
 use App\Models\Comment;
+use App\Models\Purchase;
 
 class ItemController extends Controller
 {
@@ -53,8 +55,21 @@ class ItemController extends Controller
     public function purchaseView($itemId){
         $item=Item::find($itemId);
         $user_id=Auth::id();
-        $profile=Profile::where('user_id', $user_id)->get();
+        $profile=Profile::where('user_id', $user_id)->first();
         return view('purchase', compact('item', 'profile'));
+    }
+
+    public function purchase(PurchaseRequest $request, $itemId){
+        $item=Item::find($itemId);
+        $user_id=Auth::id();
+        $profile=Profile::where('user_id', $user_id)->first();
+        $payment_method=$request->input('payment_method');
+        $purchase=Purchase::create([
+            'profile_id'=>$profile->id,
+            'item_id'=>$itemId,
+            'payment_method'=>$payment_method
+        ]);
+        return redirect('/');
     }
 
     public function comment(CommentRequest $request, $itemId){

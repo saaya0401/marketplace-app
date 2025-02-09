@@ -8,6 +8,10 @@ class Item extends Model
 {
     protected $fillable=['user_id', 'condition_id', 'title', 'description', 'image', 'price'];
 
+    public function getFormattedPriceAttribute(){
+        return number_format($this->price);
+    }
+
     public function user(){
         return $this->belongsTo(User::class);
     }
