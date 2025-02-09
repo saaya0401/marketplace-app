@@ -18,6 +18,7 @@ class ItemController extends Controller
     public function index(Request $request){
         $user_id=Auth::id();
         $tab=$request->query('tab');
+        $purchaseItemIds=Purchase::pluck('item_id')->toArray();
         if($tab==='mylist'){
             $items=Mylist::where('user_id', $user_id)->whereHas('item', function($query) use ($user_id) {
                 $query->where('user_id', '!=', $user_id);
@@ -25,7 +26,7 @@ class ItemController extends Controller
         }else{
             $items=Item::where('user_id', '!=', $user_id)->get();
         }
-        return view('index', compact('items', 'tab'));
+        return view('index', compact('items', 'tab', 'purchaseItemIds'));
     }
 
     public function search(Request $request){

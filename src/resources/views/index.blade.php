@@ -15,9 +15,12 @@
     @foreach($items as $item)
     <form class="item-card__form" action="{{url('/item/' . (isset($item->item) ? $item->item->id : $item->id))}}" method="get">
         @csrf
-        <button class="item-card__button" type="submit">
+        <button class="item-card__button" type="submit" @if(in_array(isset($item->item) ? $item->item->id : $item->id, $purchaseItemIds)) disabled @endif>
             <div class="item-card__image">
                 <img src="{{ Storage::url(isset($item->item) ? $item->item->image : $item->image)}}" alt="商品画像" class="item-card__img">
+                @if(in_array(isset($item->item) ? $item->item->id : $item->id, $purchaseItemIds))
+                    <span class="sold-label">Sold</span>
+                @endif
             </div>
             <div class="item-card__title">
                 <span class="item-card__name">{{isset($item->item) ? $item->item->title : $item->title}}</span>
