@@ -2,7 +2,7 @@
     <div class="profile__image-area--inner">
         <div class="profile__image">
             @if($imageUrl)
-            <img src="{{ asset('storage/' . $imageUrl )}}" alt="Uploaded Image" class="profile-form__image">
+            <img src="{{ Storage::url($imageUrl) }}" alt="Uploaded Image" class="profile-form__image">
             @endif
         </div>
         <div class="profile__image-input">
@@ -14,5 +14,5 @@
         {{$message}}
         @enderror
     </div>
-    <input type="hidden" name="profile_image" value="{{ $imageUrl ?  $imageUrl : null }}">
+    <input type="hidden" name="profile_image" value="{{ $imageUrl }}">
 </div>

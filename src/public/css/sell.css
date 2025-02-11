@@ -1,0 +1,28 @@
+.exhibited-product__form {
+    width: 50%;
+    margin: 50px auto;
+}
+
+.form-title {
+    margin: 0;
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.exhibited-products {
+    margin: 50px 0;
+}
+
+.exhibited-product__title {
+    font-weight: 700;
+    margin: 0;
+    padding-bottom: 5px;
+}
+
+.exhibited-products__image {
+    border: 1px solid #5F5F5F;
+    width: 100%;
+    border-radius: 4px;
+    height: 150px;
+}

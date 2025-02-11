@@ -49,7 +49,7 @@ class ItemController extends Controller
         if($tab==='buy'){
             $items=Purchase::where('profile_id', $profile->id)->with('item')->get();
         }else{
-            $items=Item::where('user_id', '!=', $user_id)->get();
+            $items=Item::where('user_id', '=', $user_id)->get();
         }
         return view('mypage', compact('tab', 'profile', 'items'));
     }
@@ -108,5 +108,9 @@ class ItemController extends Controller
             ]);
         }
         return redirect('/item/' . $itemId);
+    }
+
+    public function sellView(){
+        return view('sell');
     }
 }

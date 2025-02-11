@@ -12,9 +12,8 @@
         </div>
         <div class="mypage-user__name">{{Auth::user()->name}}</div>
     </div>
-    <form action="/mypage/profile" method="post" class="mypage-user__form">
+    <form action="/mypage/profile" method="get" class="mypage-user__form">
         @csrf
-        @method('patch')
         <button class="mypage-user__button">
             プロフィールを編集
         </button>
