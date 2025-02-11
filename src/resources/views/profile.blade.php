@@ -7,9 +7,12 @@
 @section('content')
 <div class="content">
     <h1 class="title">プロフィール設定</h1>
-    <form class="profile-form" action="/profile" method="post">
+    <form class="profile-form" action="/mypage/profile" method="post">
         @csrf
-        @livewire('profile-image-uploader')
+        @if ($profile->exists)
+            @method('PATCH')
+        @endif
+        @livewire('profile-image-uploader', ['profile'=>$profile])
         <div class="form-item">
             <div class="form-item__name">
                 <span class="form-item__label">ユーザー名</span>
@@ -25,7 +28,7 @@
             <div class="form-item__name">
                 <span class="form-item__label">郵便番号</span>
             </div>
-            <input type="text" class="form-item__input" name="postal_code" value="{{old('postal_code')}}">
+            <input type="text" class="form-item__input" name="postal_code" value="{{old('postal_code') ?? $profile->postal_code}}">
             <div class="form-error">
                 @error('postal_code')
                 {{$message}}
@@ -36,7 +39,7 @@
             <div class="form-item__name">
                 <span class="form-item__label">住所</span>
             </div>
-            <input type="text" class="form-item__input" name="address" value="{{old('address')}}">
+            <input type="text" class="form-item__input" name="address" value="{{old('address') ?? $profile->address}}">
             <div class="form-error">
                 @error('address')
                 {{$message}}
@@ -47,7 +50,7 @@
             <div class="form-item__name">
                 <span class="form-item__label">建物名</span>
             </div>
-            <input type="text" class="form-item__input" name="building" value="{{old('building')}}">
+            <input type="text" class="form-item__input" name="building" value="{{old('building') ?? $profile->building}}">
             <div class="form-error">
                 @error('building')
                 {{$message}}

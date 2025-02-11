@@ -47,7 +47,7 @@
 
 .sold-label {
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 1);
     color: white;
     font-size: 50px;
     font-weight: 700;
@@ -55,7 +55,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-    padding: 40% 0;
+    padding: 20px;
 }
 
 .item-card__button {
@@ -78,15 +78,10 @@
 }
 
 @media screen and (max-width: 850px) {
-    * {
-        font-size: 24px;
-        font-weight: 400;
-        color: #000;
-    }
-
-    .content {
-        margin: 30px auto 0;
-        grid-template-columns: 1fr 1fr;
+    .item-card__form {
+        width: 170px;
+        height: 200px;
+        margin: 0 auto 30px;
     }
     .tab-area {
         margin-top: 10px;

@@ -21,12 +21,13 @@ class UserController extends Controller
         $validated['password']=Hash::make($validated['password']);
         $user=User::create($validated);
         Auth::login($user);
-        return redirect('/profile');
+        return redirect('/mypage/profile');
     }
 
     public function profile(){
         $user=Auth::user();
-        return view('profile', compact('user'));
+        $profile=Profile::where('user_id', $user->id)->firstOrNew();
+        return view('profile', compact('user', 'profile'));
     }
 
     public function profileStore(ProfileRequest $request){
@@ -34,6 +35,13 @@ class UserController extends Controller
         $profile['user_id']=Auth::id();
         Profile::create($profile);
         return redirect('/');
+    }
+
+    public function profileUpdate(ProfileRequest $request){
+        $profile=$request->only(['profile_image', 'postal_code', 'address', 'building']);
+        $user_id=Auth::id();
+        Profile::where('user_id', $user_id)->update($profile);
+        return redirect('/mypage');
     }
 
     public function login(LoginRequest $request){
@@ -58,7 +66,7 @@ class UserController extends Controller
         return view('address', compact('item'));
     }
 
-    public function addressChange(AddressRequest $request, $itemId){
+    public function addressUpdate(AddressRequest $request, $itemId){
         $item=Item::find($itemId);
         $profile=$request->only(['user_id', 'postal_code', 'address', 'building']);
         Profile::where('user_id', Auth::id())->update($profile);
