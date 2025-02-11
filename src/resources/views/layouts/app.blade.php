@@ -39,7 +39,8 @@
                         @endif
                     </li>
                     <li class="header-nav__item">
-                        <form action="">
+                        <form action="/mypage" method="get">
+                            @csrf
                             <button class="header-nav__button">マイページ</button>
                         </form>
                     </li>
