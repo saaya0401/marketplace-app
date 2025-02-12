@@ -11,7 +11,7 @@
     <div class="exhibited-products">
         <h3 class="exhibited-product__title">商品画像</h3>
         <div class="exhibited-products__image">
-            
+            <label class="exhibited-products__image-label"><input type="file" class="hidden">画像を選択する</label>
         </div>
     </div>
     <div class="exhibited-product__detail">
@@ -51,8 +51,10 @@
         </div>
         <div class="exhibited-product__price">
             <h3 class="exhibited-product__title">販売価格</h3>
-            <input type="text" name="price" class="exhibited-product__input" value="{{old('price')}}">
-            <span class="exhibited-product__yen">&yen;</span>
+            <div class="exhibited-product__price-wrapper">
+                <input type="text" name="price" class="exhibited-product__input-price" value="{{old('price')}}">
+                <span class="exhibited-product__yen">&yen;</span>
+            </div>
         </div>
     </div>
     <div class="exhibited-product__button">
