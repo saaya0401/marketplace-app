@@ -15,6 +15,7 @@ Route::middleware('auth')->group(function (){
     Route::patch('/mypage/profile', [UserController::class, 'profileUpdate']);
     Route::get('/mypage', [ItemController::class, 'mypage']);
     Route::get('/sell', [ItemController::class, 'sellView']);
+    Route::post('/sell', [ItemController::class, 'sell']);
     Route::get('/purchase/{itemId}', [ItemController::class, 'purchaseView']);
     Route::post('purchase/{itemId}', [ItemController::class, 'purchase']);
     Route::get('/purchase/address/{itemId}', [UserController::class, 'address']);

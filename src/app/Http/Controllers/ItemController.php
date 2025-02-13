@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\PurchaseRequest;
+use App\Http\Requests\ExhibitionRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Mylist;
 use App\Models\Item;
@@ -12,6 +13,7 @@ use App\Models\Category;
 use App\Models\Profile;
 use App\Models\Comment;
 use App\Models\Purchase;
+use App\Models\Condition;
 
 class ItemController extends Controller
 {
@@ -111,6 +113,15 @@ class ItemController extends Controller
     }
 
     public function sellView(){
-        return view('sell');
+        $conditions=Condition::all();
+        $categories=Category::all();
+        return view('sell', compact('conditions', 'categories'));
+    }
+
+    public function sell(ExhibitionRequest $request){
+        $exhibition=$request->only(['user_id', 'title', 'image', 'condition_id', 'price', 'description']);
+        $item=Item::create($exhibition);
+        $item->categories()->attach($request->categories);
+        return redirect('/');
     }
 }
