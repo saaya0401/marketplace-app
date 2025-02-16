@@ -8,7 +8,7 @@
 <div class="mypage-user__info">
     <div class="mypage-user__info-header">
         <div class="mypage-user__profile">
-            <img src="{{Storage::url($profile->profile_image)}}" alt="プロフィール画像" class="mypage-user__profile-image">
+            <img src="{{Storage::url($profile->profile_image)}}" alt="" class="mypage-user__profile-image">
         </div>
         <div class="mypage-user__name">{{Auth::user()->name}}</div>
     </div>
