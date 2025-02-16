@@ -34,7 +34,13 @@
         </div>
         <form class="item-purchase__form" action="{{url('/purchase/' . $item['id'])}}" method="get">
             @csrf
-            <button class="item-purchase__form-button" type="submit">購入手続きへ</button>
+            <button class="item-purchase__form-button" type="submit" @if(in_array($item->id, $purchaseItemIds)) disabled @endif>
+                @if(in_array($item->id, $purchaseItemIds))
+                    Sold
+                @else
+                    購入手続きへ
+                @endif
+            </button>
         </form>
         <div class="item-description">
             <h2 class="item-description__title">商品説明</h2>

@@ -5,6 +5,18 @@
 @endsection
 
 @section('content')
+@if (session('message'))
+    <div class="alert-success">
+        {{ session('message') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 <div class="tab-area">
     <div class="tab-buttons">
         <a href="{{url('/?keyword=' . request('keyword'))}}" class="tab-button {{$tab !== 'mylist' ? 'active' : '' }}">おすすめ</a>
@@ -15,7 +27,7 @@
     @foreach($items as $item)
     <form class="item-card__form" action="{{url('/item/' . (isset($item->item) ? $item->item->id : $item->id))}}" method="get">
         @csrf
-        <button class="item-card__button" type="submit" @if(in_array(isset($item->item) ? $item->item->id : $item->id, $purchaseItemIds)) disabled @endif>
+        <button class="item-card__button" type="submit" >
             <div class="item-card__image">
                 <img src="{{ Storage::url(isset($item->item) ? $item->item->image : $item->image)}}" alt="商品画像" class="item-card__img">
                 @if(in_array(isset($item->item) ? $item->item->id : $item->id, $purchaseItemIds))

@@ -40,7 +40,7 @@ class ExhibitionRequest extends FormRequest
             'image.required'=>'商品画像を選択してください',
             'image.regex'=>'商品画像は「.png」または「.jpeg」形式でアップロードしてください',
             'categories.required'=>'商品のカテゴリーを選択してください',
-            'condition.required'=>'商品の状態を選択してください',
+            'condition_id.required'=>'商品の状態を選択してください',
             'price.required'=>'商品価格を入力してください',
             'price.numeric'=>'商品価格は数値で入力してください',
             'price.min'=>'商品価格は0円以上で入力してください'

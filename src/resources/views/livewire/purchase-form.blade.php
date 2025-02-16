@@ -1,4 +1,4 @@
-<form class="purchase-form" method="post" action="{{url('/purchase/' . $item['id'])}}">
+<form class="purchase-form" method="post" action="{{url('/purchase/' . $item['id'] . '/stripe')}}">
     @csrf
     <div class="purchase-content">
     <div class="purchase-info">

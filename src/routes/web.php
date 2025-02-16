@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\PaymentController;
 
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
@@ -17,7 +18,9 @@ Route::middleware('auth')->group(function (){
     Route::get('/sell', [ItemController::class, 'sellView']);
     Route::post('/sell', [ItemController::class, 'sell']);
     Route::get('/purchase/{itemId}', [ItemController::class, 'purchaseView']);
-    Route::post('purchase/{itemId}', [ItemController::class, 'purchase']);
+    Route::post('purchase/{itemId}/stripe', [PaymentController::class, 'purchaseStripe']);
+    Route::get('/success/', [PaymentController::class, 'success']);
+    Route::get('/cancel', [PaymentController::class, 'cancel']);
     Route::get('/purchase/address/{itemId}', [UserController::class, 'address']);
     Route::patch('/purchase/address/{itemId}', [UserController::class, 'addressUpdate']);
     Route::post('/comment/{itemId}', [ItemController::class, 'comment']);

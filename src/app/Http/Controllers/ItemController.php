@@ -34,6 +34,7 @@ class ItemController extends Controller
     public function search(Request $request){
         $user_id=Auth::id();
         $tab=$request->query('tab');
+        $purchaseItemIds=Purchase::pluck('item_id')->toArray();
         if($tab === 'mylist'){
             $items=Mylist::where('user_id', $user_id)->whereHas('item', function ($query) use ($user_id) {
                 $query->where('user_id', '!=', $user_id);
@@ -41,7 +42,7 @@ class ItemController extends Controller
         }else{
             $items=Item::where('user_id', '!=', $user_id)->with('categories')->KeywordSearch($request->keyword)->get();
         }
-        return view('index', compact('items', 'tab'));
+        return view('index', compact('items', 'tab', 'purchaseItemIds'));
     }
 
     public function mypage(Request $request){
@@ -60,11 +61,12 @@ class ItemController extends Controller
         $item=Item::find($itemId);
         $user_id=Auth::id();
         $categories=Category::all();
+        $purchaseItemIds=Purchase::pluck('item_id')->toArray();
         $isMylisted=Mylist::where('item_id', $itemId)->where('user_id', $user_id)->exists();
         $mylistCount=Mylist::where('item_id', $itemId)->count();
         $commentCount=Comment::where('item_id', $itemId)->count();
         $comments=Comment::with(['profile.user'])->where('item_id', $itemId)->get();
-        return view('detail', compact('item', 'categories', 'isMylisted', 'mylistCount', 'commentCount', 'comments'));
+        return view('detail', compact('item', 'categories', 'isMylisted', 'mylistCount', 'commentCount', 'comments', 'purchaseItemIds'));
     }
 
     public function purchaseView($itemId){
@@ -79,11 +81,7 @@ class ItemController extends Controller
         $user_id=Auth::id();
         $profile=Profile::where('user_id', $user_id)->first();
         $payment_method=$request->input('payment_method');
-        $purchase=Purchase::create([
-            'profile_id'=>$profile->id,
-            'item_id'=>$itemId,
-            'payment_method'=>$payment_method
-        ]);
+        
         return redirect('/');
     }
 

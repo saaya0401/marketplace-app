@@ -135,4 +135,10 @@
         height: 200px;
         margin: 0 auto 30px;
     }
+    .item-card__img {
+        height: 170px;
+    }
+    .item-card__name {
+        font-size: 16px;
+    }
 }
