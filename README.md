@@ -10,6 +10,8 @@
 1. cp .env.example .env
 1. .envファイルの一部を以下のように編集
 ```
+APP_TIMEZONE=Asia/Tokyo
+
 DB_CONNECTION=mysql
 DB_HOST=mysql
 DB_DATABASE=laravel_db
