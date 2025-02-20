@@ -1,2 +1,6 @@
 *
 !.gitignore
+!profile-img/
+!profile-img/**
+!item-img/
+!item-img/**

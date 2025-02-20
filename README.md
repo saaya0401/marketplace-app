@@ -10,6 +10,7 @@
 1. cp .env.example .env
 1. .envファイルの一部を以下のように編集
 ```
+DB_CONNECTION=mysql
 DB_HOST=mysql
 DB_DATABASE=laravel_db
 DB_USERNAME=laravel_user
@@ -25,7 +26,8 @@ STRIPE_SECRET=sk_test_51QsIBBGCkm4oaUW7rsfBWuStvboPUrYlEtmIBGj3I9XgXxrJyjbpd0dlY
     'secret' => env('STRIPE_SECRET'),
 ],
 ```
-6. php artisan storage:link
+6. php artisan config:cache
+1. php artisan storage:link
 1. php artisan key:generate
 1. php artisan migrate
 1. php artisan db:seed
