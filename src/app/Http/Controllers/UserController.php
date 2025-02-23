@@ -14,15 +14,13 @@ use Illuminate\Auth\Events\Registered;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Item;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function register(RegisterRequest $request){
         $validated=$request->validated();
-        $validated['password']=Hash::make($validated['password']);
         $user=User::create($validated);
-        event(new Registered($user));
+        $user->sendEmailVerificationNotification();
         $id=$user->id;
         return redirect('email/verify/' . $id);
     }
@@ -32,12 +30,11 @@ class UserController extends Controller
         return view('auth.email_verify', compact('user'));
     }
 
-    public function emailVerify($id, EmailVerificationRequest $request){
-        $user=User::find($id);
-        $request->fulfill();
+    public function emailVerify($id, $hash){
+        $user = User::find($id);
+        $user->markEmailAsVerified();
         Auth::login($user);
-        sleep(1);
-        return redirect('/email/verify/' . $id)->with('message', 'メール認証が完了しました');
+        return redirect('/mypage/profile')->with('message', 'メール認証が完了しました');
     }
 
     public function emailNotification(Request $request){
@@ -71,7 +68,14 @@ class UserController extends Controller
         $credentials=$request->only('email', 'password');
         if(!Auth::attempt($credentials)){
             throw ValidationException::withMessages([
-                'email'=>'ログイン情報が登録されていません'
+                'email'=>'メールアドレスまたはパスワードが間違っています'
+            ]);
+        }
+        $user=Auth::user();
+        if (!$user->hasVerifiedEmail()) {
+            Auth::logout();
+            throw ValidationException::withMessages([
+                'email' => 'メール認証が完了していません',
             ]);
         }
         return redirect('/');

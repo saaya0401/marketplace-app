@@ -16,7 +16,7 @@
             <p class="email-text">登録していただいたメールアドレスに認証メールを送付しました。</p>
             <p class="email-text">メール認証を完了してください。</p>
         </div>
-        <form action="" method="get" class="email-form">
+        <form action="http://localhost:8025" method="get" class="email-form">
             @csrf
             <button class="email-form__button" type="submit">認証はこちらから</button>
         </form>
