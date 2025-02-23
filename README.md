@@ -18,6 +18,10 @@ DB_DATABASE=laravel_db
 DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
 
+QUEUE_CONNECTION=sync
+
+MAIL_FROM_ADDRESS="marketplace@example.com"
+
 STRIPE_KEY=pk_test_51QsIBBGCkm4oaUW7wkur63PFKOydrNQR1rDXkRX8mI6lZS95aohBAtlipz981yA4ROSE6wUqNAeKV4bkjPmOAUX100ZCIEWA4u
 STRIPE_SECRET=sk_test_51QsIBBGCkm4oaUW7rsfBWuStvboPUrYlEtmIBGj3I9XgXxrJyjbpd0dlYxszD9YVE0mKH6EKqPopRdVTfhMQzBlv00jlOwFb6p
 ```
@@ -51,6 +55,7 @@ STRIPE_SECRET=sk_test_51QsIBBGCkm4oaUW7rsfBWuStvboPUrYlEtmIBGj3I9XgXxrJyjbpd0dlY
 ## URL
 - 環境開発: http://localhost/
 - phpMyAdmin: http://localhost:8080/
+- MailHog: http://localhost:8025
 
 ## ER図
 ![image](marketplace-app.drawio.png)
