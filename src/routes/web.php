@@ -6,6 +6,9 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PaymentController;
 
 Route::post('/register', [UserController::class, 'register']);
+Route::get('/email/verify/{id}', [UserController::class, 'emailVerifyView']);
+Route::post('/email/verify/{id}/{hash}', [UserController::class, 'emailVerify'])->name('verification.verify');
+Route::post('/email/verification-notification', [UserController::class, 'emailNotification']);
 Route::post('/login', [UserController::class, 'login']);
 Route::get('/', [ItemController::class, 'index']);
 Route::get('item/search', [ItemController::class, 'search']);
