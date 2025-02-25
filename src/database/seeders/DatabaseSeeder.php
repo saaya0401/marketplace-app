@@ -12,12 +12,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(UserTableSeeder::class);
+        \DB::commit();
+
         $this->call([
-            UserTableSeeder::class,
             ProfileTableSeeder::class,
             ConditionTableSeeder::class,
             CategoryTableSeeder::class,
-            ItemTableSeeder::class
         ]);
+
+        \DB::commit();
+        $this->call(ItemTableSeeder::class);
     }
 }
