@@ -56,29 +56,17 @@ class ItemTest extends TestCase
         $purchases=Purchase::whereIn('item_id', [$items[1]->id, $items[2]->id])->get();
         foreach($purchases as $purchase){
             $response->assertSee('Sold');
-        };
+        }
     }
 
     public function testLoginUserItems(){
-        $response=$this->get('/login');
-        $response->assertStatus(200);
-
-        $response=$this->post('/login', [
-            'email'=>'saaya@example.com',
-            'password'=>'saayakoba'
-        ]);
-
         $user=User::where('email', 'saaya@example.com')->first();
         $this->assertNotNull($user);
-
-        $this->assertTrue(auth()->attempt([
-            'email'=>'saaya@example.com',
-            'password'=>'saayakoba'
-        ]));
-        $response->assertRedirect('/');
-
         $userItems=Item::where('user_id', $user->id)->get();
+
+        $this->actingAs($user);
         $response=$this->get('/');
+        $response->Status(200);
 
         foreach($userItems as $item){
             $response->assertDontSee($item->title);
