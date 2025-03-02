@@ -68,7 +68,7 @@ class UserController extends Controller
         $credentials=$request->only('email', 'password');
         if(!Auth::attempt($credentials)){
             throw ValidationException::withMessages([
-                'email'=>'メールアドレスまたはパスワードが間違っています'
+                'email'=>'ログイン情報が登録されていません'
             ]);
         }
         $user=Auth::user();

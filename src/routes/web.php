@@ -11,7 +11,7 @@ Route::middleware(['signed'])->get('/email/verify/{id}/{hash}', [UserController:
 Route::post('/email/verification-notification', [UserController::class, 'emailNotification']);
 Route::post('/login', [UserController::class, 'login']);
 Route::get('/', [ItemController::class, 'index']);
-Route::get('item/search', [ItemController::class, 'search']);
+Route::get('/item/search', [ItemController::class, 'search']);
 Route::middleware('auth')->group(function (){
     Route::post('/logout', [UserController::class, 'logout']);
     Route::get('/mypage/profile', [UserController::class, 'profile']);

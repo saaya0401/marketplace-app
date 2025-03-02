@@ -15,4 +15,13 @@ class Mylist extends Model
     public function item(){
         return $this->belongsTo(Item::class);
     }
+
+    public function scopeKeywordSearch($query, $keyword)
+    {
+        if (!empty($keyword)) {
+            $query->whereHas('item', function ($query) use ($keyword) {
+            $query->where('title', 'like', '%' . $keyword . '%');
+            });
+        }
+    }
 }

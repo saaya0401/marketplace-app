@@ -36,11 +36,11 @@ class ItemController extends Controller
         $tab=$request->query('tab');
         $purchaseItemIds=Purchase::pluck('item_id')->toArray();
         if($tab === 'mylist'){
-            $items=Mylist::where('user_id', $user_id)->whereHas('item', function ($query) use ($user_id) {
+            $items=Mylist::where('user_id', $user_id)->whereHas('item', function ($query) use ($user_id,) {
                 $query->where('user_id', '!=', $user_id);
-            })->with('categories')->KeywordSearch($request->keyword)->get();
+            })->KeywordSearch($request->keyword)->get();
         }else{
-            $items=Item::where('user_id', '!=', $user_id)->with('categories')->KeywordSearch($request->keyword)->get();
+            $items=Item::where('user_id', '!=', $user_id)->KeywordSearch($request->keyword)->get();
         }
         return view('index', compact('items', 'tab', 'purchaseItemIds'));
     }
@@ -81,7 +81,7 @@ class ItemController extends Controller
         $user_id=Auth::id();
         $profile=Profile::where('user_id', $user_id)->first();
         $payment_method=$request->input('payment_method');
-        
+
         return redirect('/');
     }
 
