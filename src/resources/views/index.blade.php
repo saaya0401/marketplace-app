@@ -20,7 +20,7 @@
 <div class="tab-area">
     <div class="tab-buttons">
         <a href="{{url('/?keyword=' . request('keyword'))}}" class="tab-button {{$tab !== 'mylist' ? 'active' : '' }}">おすすめ</a>
-        <a href="{{url('/?tab=mylist&keyword=' . request('keyword'))}}" class="tab-button {{$tab === 'mylist' ? 'active' : '' }}">マイリスト</a>
+        <a href="{{url('/item/search?tab=mylist&keyword=' . request('keyword'))}}" class="tab-button {{$tab === 'mylist' ? 'active' : '' }}">マイリスト</a>
     </div>
 </div>
 <div class="content">
