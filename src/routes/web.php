@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/sell', [ItemController::class, 'sellView']);
     Route::post('/sell', [ItemController::class, 'sell']);
     Route::get('/purchase/{itemId}', [ItemController::class, 'purchaseView']);
-    Route::post('purchase/{itemId}/stripe', [PaymentController::class, 'purchaseStripe']);
+    Route::post('/purchase/{itemId}/stripe', [PaymentController::class, 'purchaseStripe']);
     Route::get('/success/', [PaymentController::class, 'success']);
     Route::get('/cancel', [PaymentController::class, 'cancel']);
     Route::get('/purchase/address/{itemId}', [UserController::class, 'address']);

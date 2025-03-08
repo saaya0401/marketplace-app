@@ -89,7 +89,7 @@ class MylistTest extends TestCase
     }
 
     public function testLoginUserMylist(){
-        $userItems=Item::where('user_id', '$this->user->id')->get();
+        $userItems=Item::where('user_id', $this->user->id)->get();
 
         $response=$this->get('/?tab=mylist');
         $response->assertStatus(200);
