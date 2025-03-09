@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
+@if (session('message'))
+    <div class="alert-success">
+        {{ session('message') }}
+    </div>
+@endif
 <div class="content">
     <h1 class="title">プロフィール設定</h1>
     <form class="profile-form" action="/mypage/profile" method="post">

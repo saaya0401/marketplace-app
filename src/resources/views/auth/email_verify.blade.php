@@ -7,10 +7,10 @@
 @section('content')
 <div class="content">
     @if (session('message'))
-    <div class="alert-success">
-        {{ session('message') }}
-    </div>
-@endif
+        <div class="alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
     <div class="content-inner">
         <div class="email-text__group">
             <p class="email-text">登録していただいたメールアドレスに認証メールを送付しました。</p>
