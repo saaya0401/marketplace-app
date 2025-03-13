@@ -41,3 +41,10 @@
     border: none;
     cursor: pointer;
 }
+
+@media screen and (max-width: 850px) {
+    .content-inner {
+        width: 70%;
+        margin: 250px auto;
+    }
+}
