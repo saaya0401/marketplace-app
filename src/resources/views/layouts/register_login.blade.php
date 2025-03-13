@@ -11,10 +11,10 @@
 <body>
     <header class="header">
         <div class="header-inner">
-            <div class="header__logo">
+            <a class="header__logo" href="/">
                 <img src="{{asset('icon/Vector.png')}}" alt="アイコン" class="header__logo-icon">
                 <img src="{{asset('icon/COACHTECH.png')}}" alt="COACHTECH" class="header__logo-title">
-            </div>
+            </a>
             @yield('nav')
         </div>
     </header>

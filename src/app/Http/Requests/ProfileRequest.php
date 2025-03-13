@@ -22,6 +22,7 @@ class ProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name'=>['required'],
             'profile_image'=>['nullable', 'regex:/^profile-img\/.*\.(jpeg|png)$/'],
             'postal_code'=>['required', 'regex:/^\d{3}-\d{4}$/'],
             'address'=>['required'],
@@ -32,6 +33,7 @@ class ProfileRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'name.required'=>'ユーザー名を入力してください',
             'profile_image.regex'=>'「.png」または「.jpeg」形式でアップロードしてください',
             'postal_code.required'=>'郵便番号を入力してください',
             'postal_code.regex'=>'郵便番号はハイフンを含んだ８文字で入力してください',

@@ -71,7 +71,6 @@
                     <div class="item-comments__list-profile">
                         <div class="item-comments__user-profile">
                             <img src="{{Storage::url($comment->profile->profile_image)}}" alt="" class="item-comments__profile--image">
-
                         </div>
                         <div class="item-comments__user-name">
                             {{$comment->profile->user->name}}

@@ -73,21 +73,17 @@
         flex-wrap: wrap;
         padding: 10px 20px;
     }
-
     .header__logo-icon {
         height: 20px;
     }
-
     .header__logo-title {
         height: 20px;
     }
-
     .header-title {
         padding: 5px 20px;
         height: auto;
         width: 300px;
     }
-
     nav {
         display: block;
         width: 100%;

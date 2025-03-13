@@ -52,7 +52,10 @@ class UserController extends Controller
 
     public function profileStore(ProfileRequest $request){
         $profile=$request->only(['profile_image', 'postal_code', 'address', 'building']);
-        $profile['user_id']=Auth::id();
+        $user_id=Auth::id();
+        $user=$request->only('name');
+        User::find($user_id)->update($user);
+        $profile['user_id']=$user_id;
         Profile::create($profile);
         return redirect('/');
     }
@@ -61,6 +64,8 @@ class UserController extends Controller
         $profile=$request->only(['profile_image', 'postal_code', 'address', 'building']);
         $user_id=Auth::id();
         Profile::where('user_id', $user_id)->update($profile);
+        $user=$request->only('name');
+        User::find($user_id)->update($user);
         return redirect('/mypage');
     }
 
