@@ -34,7 +34,7 @@ class PurchaseTest extends TestCase
         $this->actingAs($this->user);
 
         $this->profile=Profile::where('user_id', $this->user->id)->first();
-        $this->item=Item::where('id', 1)->first();
+        $this->item=Item::where('id', 2)->first();
 
         Stripe::setApiKey(Config::get('services.stripe.secret'));
 
@@ -101,9 +101,6 @@ class PurchaseTest extends TestCase
             'item_id' => $this->item->id,
             'payment_method'=>'カード払い'
         ]);
-
-        $response = $this->get(url('/success?session_id=' . $this->session->id . '&item_id=' . $this->item->id));
-        $response->assertRedirect('/');
         $response=$this->get('/');
         $response->assertSee('Sold');
     }

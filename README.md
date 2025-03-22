@@ -28,14 +28,8 @@ MAIL_FROM_ADDRESS="marketplace@example.com"
 STRIPE_KEY=pk_test_51QsIBBGCkm4oaUW7wkur63PFKOydrNQR1rDXkRX8mI6lZS95aohBAtlipz981yA4ROSE6wUqNAeKV4bkjPmOAUX100ZCIEWA4u
 STRIPE_SECRET=sk_test_51QsIBBGCkm4oaUW7rsfBWuStvboPUrYlEtmIBGj3I9XgXxrJyjbpd0dlYxszD9YVE0mKH6EKqPopRdVTfhMQzBlv00jlOwFb6p
 ```
-5. src/config/services.phpに以下を追加
-```
-'stripe' => [
-    'key' => env('STRIPE_KEY'),
-    'secret' => env('STRIPE_SECRET'),
-],
-```
-6. php artisan config:clear
+
+5. php artisan config:clear
 1. php artisan storage:link
 1. php artisan key:generate
 1. php artisan migrate
@@ -53,6 +47,7 @@ STRIPE_SECRET=sk_test_51QsIBBGCkm4oaUW7rsfBWuStvboPUrYlEtmIBGj3I9XgXxrJyjbpd0dlY
 
 
 ## テスト手順
+1. docker-compose exec php bash
 1. cp .env .env.testing
 1. .env.testingファイルの一部を以下のように編集
 ```
@@ -67,13 +62,9 @@ DB_PASSWORD=root
 1. php artisan key:generate --env=testing
 1. php artisan migrate --env=testing
 1. php artisan config:cache
-1. phpunit.xmlファイルの一部を以下のように編集
-```
-<env name="DB_CONNECTION" value="mysql_test"/>
-<env name="DB_DATABASE" value="demo_test"/>
-```
 
-8. php artisan test --filter RegisterTest
+*php artisan test でまとめてテストするとエラーになることがあるので個別にテストしてください
+7. php artisan test --filter RegisterTest
 1. php artisan test --filter LoginTest
 1. php artisan test --filter LogoutTest
 1. php artisan test --filter ItemTest
@@ -88,8 +79,6 @@ DB_PASSWORD=root
 1. php artisan test --filter ProfileTest
 1. php artisan test --filter ProfileUpdateTest
 1. php artisan test --filter SellTest
-
-*php artisan test でまとめてテストするとエラーになることがあります
 
 ## 使用技術
 - MySQL 8.0.26

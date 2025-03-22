@@ -16,9 +16,9 @@ class UserTableSeeder extends Seeder
     {
         $users=[
             [
-            'name'=>'koharu',
-            'email'=>'koharu@example.com',
-            'password'=>'koharukoba',
+            'name'=>'saaya',
+            'email'=>'saaya@example.com',
+            'password'=>'saayakoba',
             'email_verified_at'=>Carbon::now(),
             ],
             [
@@ -40,9 +40,9 @@ class UserTableSeeder extends Seeder
             'email_verified_at'=>Carbon::now(),
             ],
             [
-            'name'=>'saaya',
-            'email'=>'saaya@example.com',
-            'password'=>'saayakoba',
+            'name'=>'koharu',
+            'email'=>'koharu@example.com',
+            'password'=>'koharukoba',
             'email_verified_at'=>Carbon::now(),
             ],
         ];
