@@ -48,19 +48,6 @@ STRIPE_SECRET=sk_test_51QsIBBGCkm4oaUW7rsfBWuStvboPUrYlEtmIBGj3I9XgXxrJyjbpd0dlY
 
 ## テスト手順
 1. docker-compose exec php bash
-1. cp .env .env.testing
-1. .env.testingファイルの一部を以下のように編集
-```
-APP_ENV=test
-APP_KEY=
-
-DB_DATABASE=demo_test
-DB_USERNAME=root
-DB_PASSWORD=root
-```
-3. php artisan config:clear
-1. php artisan key:generate --env=testing
-1. php artisan migrate --env=testing
 1. php artisan config:cache
 1. php artisan config:clear
 
