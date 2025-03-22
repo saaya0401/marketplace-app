@@ -62,9 +62,11 @@ DB_PASSWORD=root
 1. php artisan key:generate --env=testing
 1. php artisan migrate --env=testing
 1. php artisan config:cache
+1. php artisan config:clear
 
 *php artisan test でまとめてテストするとエラーになることがあるので個別にテストしてください
-7. php artisan test --filter RegisterTest
+
+8. php artisan test --filter RegisterTest
 1. php artisan test --filter LoginTest
 1. php artisan test --filter LogoutTest
 1. php artisan test --filter ItemTest
