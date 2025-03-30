@@ -18,6 +18,7 @@
             </a>
             <form class="header-search__form" method="get" action="/item/search">
                 @csrf
+                <input type="hidden" name="tab" value="{{request('tab', $tab ?? '')}}">
                 <input type="text" name="keyword" placeholder="なにをお探しですか？" value="{{old('keyword', request('keyword'))}}" class="header-search__form--input">
                 <div class="header-search__form--button">
                     <button class="header-search__form--button-submit" type="submit">検索</button>
