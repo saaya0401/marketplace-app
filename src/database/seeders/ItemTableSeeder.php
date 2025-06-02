@@ -31,7 +31,7 @@ class ItemTableSeeder extends Seeder
                 'image'=>'item-img/Disk.png',
                 'price'=>5000,
                 'condition_id'=>2,
-                'user_id'=>2,
+                'user_id'=>1,
                 'categories'=>[8,13]
             ],
             [
@@ -40,7 +40,7 @@ class ItemTableSeeder extends Seeder
                 'image'=>'item-img/Love.png',
                 'price'=>300,
                 'condition_id'=>3,
-                'user_id'=>3,
+                'user_id'=>1,
                 'categories'=>[10]
             ],
             [
@@ -49,7 +49,7 @@ class ItemTableSeeder extends Seeder
                 'image'=>'item-img/Shoes.png',
                 'price'=>4000,
                 'condition_id'=>4,
-                'user_id'=>4,
+                'user_id'=>1,
                 'categories'=>[1,4,5]
             ],
             [
@@ -76,7 +76,7 @@ class ItemTableSeeder extends Seeder
                 'image'=>'item-img/Purse.png',
                 'price'=>3500,
                 'condition_id'=>3,
-                'user_id'=>3,
+                'user_id'=>2,
                 'categories'=>[1,4]
             ],
             [
@@ -85,7 +85,7 @@ class ItemTableSeeder extends Seeder
                 'image'=>'item-img/Tumbler.png',
                 'price'=>500,
                 'condition_id'=>4,
-                'user_id'=>4,
+                'user_id'=>2,
                 'categories'=>[10,14]
             ],
             [
@@ -94,7 +94,7 @@ class ItemTableSeeder extends Seeder
                 'image'=>'item-img/Waitress.png',
                 'price'=>4000,
                 'condition_id'=>1,
-                'user_id'=>1,
+                'user_id'=>2,
                 'categories'=>[2,10]
             ],
             [

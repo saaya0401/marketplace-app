@@ -28,18 +28,6 @@ class UserTableSeeder extends Seeder
             'email_verified_at'=>Carbon::now(),
             ],
             [
-            'name'=>'yasu',
-            'email'=>'yasu@example.com',
-            'password'=>'yasukoba',
-            'email_verified_at'=>Carbon::now(),
-            ],
-            [
-            'name'=>'sarasa',
-            'email'=>'sarasa@example.com',
-            'password'=>'sarasakoba',
-            'email_verified_at'=>Carbon::now(),
-            ],
-            [
             'name'=>'koharu',
             'email'=>'koharu@example.com',
             'password'=>'koharukoba',

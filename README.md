@@ -47,11 +47,18 @@ STRIPE_SECRET=sk_test_51QsIBBGCkm4oaUW7rsfBWuStvboPUrYlEtmIBGj3I9XgXxrJyjbpd0dlY
 
 
 ## テスト手順
-1. docker-compose exec php bash
+1. テスト用データベースの作成
+```
+1. docker-compose exec mysql bash
+2. mysql -u root -p
+3. passwordを求められたらrootと入力する
+4. CREATE DATABASE demo_test;
+```
+2. docker-compose exec php bash
 1. php artisan config:cache
 1. php artisan config:clear
 
-*php artisan test でまとめてテストするとエラーになることがあるので個別にテストしてください
+*php artisan test でまとめてテストするとエラーになる場合は個別にテストしてください
 
 8. php artisan test --filter RegisterTest
 1. php artisan test --filter LoginTest
