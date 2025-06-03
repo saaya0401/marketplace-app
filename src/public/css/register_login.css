@@ -4,6 +4,11 @@
     color: #000;
 }
 
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
 .header {
     background-color: #000;
     width: 100vw;
@@ -14,4 +19,14 @@
 
 .header-inner {
     padding: 15px;
+}
+
+.container {
+    display: flex;
+    height: calc(100vh - 68.46px);
+}
+
+.main {
+    width: 82%;
+    overflow-y: auto;
 }

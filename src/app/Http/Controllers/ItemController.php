@@ -14,6 +14,7 @@ use App\Models\Profile;
 use App\Models\Comment;
 use App\Models\Purchase;
 use App\Models\Condition;
+use App\Models\TransactionMessage;
 
 class ItemController extends Controller
 {
@@ -46,15 +47,24 @@ class ItemController extends Controller
     }
 
     public function mypage(Request $request){
-        $user_id=Auth::id();
-        $profile=Profile::where('user_id', $user_id)->first();
-        $tab=$request->query('tab');
-        if($tab==='buy'){
-            $items=Purchase::where('profile_id', $profile->id)->with('item')->get();
+        $user=Auth::user();
+        $profile=Profile::where('user_id', $user->id)->first();
+        $averageRating=round($user->receivedRatings()->avg('rating' ?? 0));
+        $tab=$request->query('tab', 'sell');
+        $purchases=Purchase::where('profile_id', $profile->id)->with('item')->get();
+        if($tab ==='buy'){
+            $items=$purchases;
+        }elseif($tab === 'sell'){
+            $items=Item::where('user_id', '=', $user->id)->get();
         }else{
-            $items=Item::where('user_id', '=', $user_id)->get();
+            $items=Purchase::where('profile_id', $profile->id)->where('status', 'in_progress')->with('item')->withCount([
+                'transactionMessages as unreadCount'=>function ($query) use ($user){
+                    $query->where('user_id', '!=', $user->id)->where('is_read', false);
+                }
+            ])->get();
         }
-        return view('mypage', compact('tab', 'profile', 'items'));
+        $unreadCountAll=TransactionMessage::whereIn('purchase_id', $purchases->pluck('id'))->where('user_id', auth()->id())->where('is_read', false)->count();
+        return view('mypage', compact('tab', 'profile', 'items', 'averageRating', 'unreadCountAll'));
     }
 
     public function detail($itemId){
