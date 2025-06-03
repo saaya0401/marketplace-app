@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('transaction_messages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('purchase_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->text('body');
+            $table->string('message_image')->nullable();
+            $table->boolean('is_read')->default(false);
             $table->timestamps();
         });
     }

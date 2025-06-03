@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\TransactionController;
 
 Route::post('/register', [UserController::class, 'register']);
 Route::get('/email/verify/{id}', [UserController::class, 'emailVerifyView']);
@@ -28,5 +29,6 @@ Route::middleware('auth')->group(function (){
     Route::patch('/purchase/address/{itemId}', [UserController::class, 'addressUpdate']);
     Route::post('/comment/{itemId}', [ItemController::class, 'comment']);
     Route::post('/mylist/{itemId}', [ItemController::class, 'mylist']);
+    Route::get('/transaction/{itemId}', [TransactionController::class, 'chatView']);
 });
 Route::get('/item/{itemId}', [ItemController::class, 'detail']);

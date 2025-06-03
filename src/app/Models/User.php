@@ -53,5 +53,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Profile::class);
     }
 
-
+    public function receivedRatings(){
+        return $this->hasMany(Rating::class, 'to_user_id');
+    }
 }

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{asset('css/sanitize.css')}}">
     <link rel="stylesheet" href="{{asset('css/register_login.css')}}">
     @yield('css')
+    @livewireStyles
 </head>
 <body>
     <header class="header">
@@ -18,8 +19,14 @@
             @yield('nav')
         </div>
     </header>
-    <main>
-        @yield('content')
-    </main>
+    <div class="container">
+        <aside class="aside">
+            @yield('side')
+        </aside>
+        <main class="main">
+            @yield('content')
+        </main>
+    </div>
+    @livewireScripts
 </body>
 </html>
