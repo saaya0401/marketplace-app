@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/mypage', [ItemController::class, 'mypage']);
     Route::get('/sell', [ItemController::class, 'sellView']);
     Route::post('/sell', [ItemController::class, 'sell']);
+    Route::post('/transaction/message', [TransactionController::class, 'message']);
     Route::get('/purchase/{itemId}', [ItemController::class, 'purchaseView']);
     Route::post('/purchase/{itemId}/stripe', [PaymentController::class, 'purchaseStripe']);
     Route::get('/success', [PaymentController::class, 'success']);

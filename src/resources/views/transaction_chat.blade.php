@@ -26,17 +26,19 @@
                     「<span class="header-user__name">{{ $item->user->name }}</span>」さんとの取引画面
                 </h2>
             </div>
+            @if(Auth::id() !== $item->user->id)
             <form action="" method="post" class="complete-button">
                 @csrf
                 @method('patch')
                 <button class="complete-form__button">取引を完了する</button>
             </form>
+            @endif
         </div>
         <div class="transaction-item">
             <img src="{{ Storage::url($item->image) }}" alt="商品画像" class="transaction-item__image">
             <div class="transaction-item__info">
                 <h1 class="transaction-item__title">{{ $item->title }}</h1>
-                <h3 class="transaction-item__price">{{ $item->price }}</h3>
+                <h3 class="transaction-item__price">{{ $item->getFormattedPriceAttribute() }}</h3>
             </div>
         </div>
         <div class="chat-area">
@@ -62,10 +64,26 @@
                 </form>
             </div>
         </div>
-        <form action="" method="post" class="message-form">
+        <form action="/transaction/message" method="post" class="message-form">
             @csrf
-            <textarea name="body" placeholder="取引メッセージを記入してください" class="message-textarea"></textarea>
+            <div class="chat-message__area">
+                <div class="form-errors">
+                    <span class="form-error">
+                        @error('body')
+                            {{ $message }}
+                        @enderror
+                    </span>
+                    <span class="form-error">
+                        @error('message_image')
+                            {{ $message }}
+                        @enderror
+                    </span>
+                </div>
+                <textarea name="body" placeholder="取引メッセージを記入してください" class="message-textarea"></textarea>
+            </div>
             @livewire('chat-message-image')
+            <input type="hidden" name="user_id" value="{{ $self->user->id }}">
+            <input type="hidden" name="purchase_id" value="{{ $item->purchase->id }}">
             <button class="message-form__button">
                 <img src="{{ asset('/icon/send.png') }}" alt="" class="message-form__button-image">
             </button>
