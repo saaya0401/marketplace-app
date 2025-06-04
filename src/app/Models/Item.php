@@ -29,4 +29,8 @@ class Item extends Model
             $query->where('title', 'like', '%' . $keyword . '%');
         }
     }
+
+    public function purchase(){
+        return $this->hasOne(Purchase::class);
+    }
 }
