@@ -20,12 +20,7 @@
         </div>
     </header>
     <div class="container">
-        <aside class="aside">
-            @yield('side')
-        </aside>
-        <main class="main">
-            @yield('content')
-        </main>
+        @yield('content')
     </div>
     @livewireScripts
 </body>

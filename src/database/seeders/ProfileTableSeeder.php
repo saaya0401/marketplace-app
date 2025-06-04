@@ -22,13 +22,13 @@ class ProfileTableSeeder extends Seeder
             ],
             [
                 'user_id'=>2,
-                'profile_image'=>'profile-img/elephant.png',
+                'profile_image'=>'profile-img/strawberry.png',
                 'postal_code'=>'123-4567',
                 'address'=>'大阪府高槻市'
             ],
             [
                 'user_id'=>3,
-                'profile_image'=>'profile-img/elephant.png',
+                'profile_image'=>'profile-img/peach.png',
                 'postal_code'=>'123-4567',
                 'address'=>'大阪府高槻市'
             ],
