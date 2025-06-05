@@ -21,9 +21,15 @@
     <div class="content">
         <div class="chat-header">
             <div class="header-user__info">
-                <img src="{{ Storage::url($item->user->profile->profile_image) }}" alt="アイコン" class="header-user__image">
+                <img src="{{ Storage::url(Auth::id() === $item->user->id ? ($buyer->profile_image ?? '') : ($item->user->profile->profile_image ?? '')) }}" alt="アイコン" class="header-user__image">
                 <h2 class="header-title">
-                    「<span class="header-user__name">{{ $item->user->name }}</span>」さんとの取引画面
+                    「<span class="header-user__name">
+                        @if(Auth::id() === $item->user->id)
+                            {{ $buyer->user->name}}
+                        @else
+                            {{ $item->user->name }}
+                        @endif
+                    </span>」さんとの取引画面
                 </h2>
             </div>
             @if(Auth::id() !== $item->user->id)
@@ -42,27 +48,46 @@
             </div>
         </div>
         <div class="chat-area">
-            <div class="chat-content">
-                <div class="chat__user-info">
-                    <img src="{{ Storage::url($item->user->profile->profile_image) }}" alt="アイコン" class="chat__user-image">
-                    <h6 class="chat__user-name">{{ $item->user->name}}</h6>
-                </div>
-                <div class="chat-message">ff</div>
-            </div>
-            <div class="chat-content__self">
-                <div class="chat__user-info--self">
-                    <h6 class="chat__user-name">{{ $self->user->name }}</h6>
-                    <img src="{{ Storage::url($self->profile_image) }}" alt="アイコン" class="chat__user-image">
-                </div>
-                <form class="chat-message__form">
-                    @csrf
-                    <input type="text" class="chat-message__input">
-                    <div class="chat-message__button">
-                        <button class="chat-message__button-action" formaction="" formmethod="">編集</button>
-                        <button class="chat-message__button-action" formaction="" formmethod="">削除</button>
+            @foreach($transactionMessages as $transactionMessage)
+            @if($transactionMessage->user_id !== Auth::id())
+                <div class="chat-content">
+                    <div class="chat__user-info">
+                        <img src="{{ Storage::url(Auth::id() === $item->user->id ? ($buyer->profile_image ?? '') : ($item->user->profile->profile_image ?? '')) }}" alt="アイコン" class="chat__user-image">
+                        <h6 class="chat__user-name">
+                            @if(Auth::id() === $item->user->id)
+                                {{ $buyer->user->name}}
+                            @else
+                                {{ $item->user->name }}
+                            @endif
+                        </h6>
                     </div>
-                </form>
-            </div>
+                    <div class="chat-message">
+                        {{ $transactionMessage->body }}
+                    </div>
+                    @if($transactionMessage->message_image)
+                        <img src="{{ Storage::url($transactionMessage->message_image) }}" alt="画像" class="message-img">
+                    @endif
+                </div>
+            @else
+                <div class="chat-content__self">
+                    <div class="chat__user-info--self">
+                        <h6 class="chat__user-name">{{ $self->user->name }}</h6>
+                        <img src="{{ Storage::url($self->profile_image) }}" alt="アイコン" class="chat__user-image">
+                    </div>
+                    <form class="chat-message__form">
+                        @csrf
+                        <input type="text" class="chat-message__input" placeholder="{{ $transactionMessage->body }}">
+                        @if($transactionMessage->message_image)
+                            <img src="{{ Storage::url($transactionMessage->message_image) }}" alt="画像" class="message-img">
+                        @endif
+                        <div class="chat-message__button">
+                            <button class="chat-message__button-action" formaction="" formmethod="">編集</button>
+                            <button class="chat-message__button-action" formaction="" formmethod="">削除</button>
+                        </div>
+                    </form>
+                </div>
+            @endif
+            @endforeach
         </div>
         <form action="/transaction/message" method="post" class="message-form">
             @csrf
@@ -79,7 +104,7 @@
                         @enderror
                     </span>
                 </div>
-                <textarea name="body" placeholder="取引メッセージを記入してください" class="message-textarea"></textarea>
+                <textarea name="body" placeholder="取引メッセージを記入してください" class="message-textarea">{{ old('body') }}</textarea>
             </div>
             @livewire('chat-message-image')
             <input type="hidden" name="user_id" value="{{ $self->user->id }}">
@@ -90,4 +115,27 @@
         </form>
     </div>
 </main>
+@endsection
+
+@section('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const textarea = document.querySelector('.message-textarea');
+        const itemId="{{ $item->id }}";
+        const key = 'chat_draft_body_' + itemId;
+
+        const savedText = sessionStorage.getItem(key);
+        if (savedText) {
+            textarea.value = savedText;
+        }
+
+        textarea.addEventListener('input', function () {
+            sessionStorage.setItem(key, textarea.value);
+        });
+
+        document.querySelector('.message-form')?.addEventListener('submit', function () {
+            sessionStorage.removeItem(key);
+        });
+    });
+</script>
 @endsection

@@ -8,8 +8,8 @@ class Purchase extends Model
 {
     protected $fillable=['profile_id', 'item_id', 'payment_method', 'status'];
 
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function profile(){
+        return $this->belongsTo(Profile::class);
     }
 
     public function item(){

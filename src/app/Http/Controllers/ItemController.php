@@ -51,19 +51,36 @@ class ItemController extends Controller
         $profile=Profile::where('user_id', $user->id)->first();
         $averageRating=round($user->receivedRatings()->avg('rating' ?? 0));
         $tab=$request->query('tab', 'sell');
-        $purchases=Purchase::where('profile_id', $profile->id)->with('item')->get();
+        $purchases=collect();
         if($tab ==='buy'){
+            $purchases=Purchase::where('profile_id', $profile->id)->with('item', 'transactionMessages')->get();
             $items=$purchases;
         }elseif($tab === 'sell'){
             $items=Item::where('user_id', '=', $user->id)->get();
         }else{
-            $items=Purchase::where('profile_id', $profile->id)->where('status', 'in_progress')->with('item')->withCount([
+            $buySide=Purchase::where('profile_id', $profile->id)->where('status', 'in_progress')->with(['item', 'transactionMessages'])->withCount([
                 'transactionMessages as unreadCount'=>function ($query) use ($user){
                     $query->where('user_id', '!=', $user->id)->where('is_read', false);
                 }
             ])->get();
+            $sellItemIds=Item::where('user_id', $user->id)->pluck('id');
+            $sellSide=Purchase::whereIn('item_id', $sellItemIds)->with(['item', 'transactionMessages'])->withCount([
+                'transactionMessages as unreadCount'=>function($query) use ($user){
+                    $query->where('user_id', '!=', $user->id)->where('is_read', false);
+                }
+            ])->get();
+            $purchases=$buySide->merge($sellSide);
+            $items=$purchases->sortByDesc(function ($purchase){
+                return optional($purchase->transactionMessages->last())->created_at;
+            })->values();
         }
-        $unreadCountAll=TransactionMessage::whereIn('purchase_id', $purchases->pluck('id'))->where('user_id', auth()->id())->where('is_read', false)->count();
+        $unreadCountAll=TransactionMessage::whereHas('purchase', function ($query) use ($user, $profile){
+            $query->where('status', 'in_progress')->where(function ($q) use ($user, $profile){
+                $q->where('profile_id', $profile->id)->orWhereHas('item', function ($q2) use ($user){
+                    $q2->where('user_id', $user->id);
+                });
+            });
+        })->where('user_id', '!=', $user->id)->where('is_read', false)->count();
         return view('mypage', compact('tab', 'profile', 'items', 'averageRating', 'unreadCountAll'));
     }
 

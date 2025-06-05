@@ -13,9 +13,19 @@ class TransactionController extends Controller
 {
     public function chatView($itemId){
         $item=Item::find($itemId);
-        $self=Auth::user()->profile;
-        $transactions=Purchase::where('profile_id', $self->id)->where('status', 'in_progress')->where('item_id', '!=', $itemId)->get();
-        return view('transaction_chat', compact('item', 'self', 'transactions'));
+        $user=Auth::user();
+        $self=$user->profile;
+        $purchase=Purchase::where('item_id', $itemId)->first();
+        $buyer=$purchase->profile;
+        if($item->user_id === $user->id){
+            $transactions=Purchase::whereIn('item_id', function ($query) use ($user){
+                $query->select('id')->from('items')->where('user_id', $user->id);
+            })->where('status', 'in_progress')->where('item_id', '!=', $itemId)->get();
+        }else{
+            $transactions=Purchase::where('profile_id', $self->id)->where('status', 'in_progress')->where('item_id', '!=', $itemId)->get();
+        }
+        $transactionMessages=TransactionMessage::where('purchase_id', $purchase->id)->orderBy('created_at', 'asc')->get();
+        return view('transaction_chat', compact('item', 'self', 'buyer', 'transactions', 'transactionMessages'));
     }
 
     public function message(MessageRequest $request){

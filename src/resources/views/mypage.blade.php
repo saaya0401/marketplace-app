@@ -38,7 +38,7 @@
         <a href="{{url('/mypage?tab=buy')}}" class="tab-button {{$tab === 'buy' ? 'active' : '' }}">購入した商品</a>
         <div class="transaction-tab">
             <a href="{{ url('/mypage?tab=transaction') }}" class="tab-button {{ $tab === 'transaction' ? 'active' : '' }}">取引中の商品</a>
-            @if($unreadCountAll)
+            @if($unreadCountAll>0)
                 <span class="transaction-message__count">{{ $unreadCountAll }}</span>
             @endif
         </div>
@@ -50,8 +50,10 @@
         <button class="item-card__button" type="submit">
             <div class="item-card__image">
                 <img src="{{Storage::Url(isset($item->item) ? $item->item->image : $item->image)}}" alt="商品画像" class="item-card__img">
-                @if($item->unreadCount)
-                    <span class="unread-count">{{ $unreadCount }}</span>
+                @if($item->unreadCount>0)
+                    <div class="unread-count__circle">
+                        <span class="unread-count">{{ $item->unreadCount }}</span>
+                    </div>
                 @endif
             </div>
             <div class="item-card__title">
