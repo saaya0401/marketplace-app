@@ -190,6 +190,10 @@
     height: 60px;
 }
 
+.chat-message__input::placeholder {
+    font-weight: 700;
+}
+
 .chat-message__button {
     display: flex;
     justify-content: right;
@@ -218,6 +222,13 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
+}
+
+.message-img {
+    margin-top: 10px;
+    width: 100%;
+    display: block;
+    margin-left: auto;
 }
 
 .chat-message__area {

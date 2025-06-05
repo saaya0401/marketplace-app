@@ -23,7 +23,7 @@ class MessageRequest extends FormRequest
     {
         return [
             'body'=>['required', 'max:400'],
-            'message_image'=>['nullable', 'regex:/^message-img\/.*\.(jpeg|png)$/']
+            'message_image'=>['nullable', 'regex:/^chat-img\/.*\.(jpeg|png)$/']
         ];
     }
 

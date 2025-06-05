@@ -113,6 +113,25 @@
     object-fit: cover;
 }
 
+.unread-count__circle {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: #ff0000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+
+.unread-count {
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+}
+
 .item-card__button {
     cursor: pointer;
     padding: 0;

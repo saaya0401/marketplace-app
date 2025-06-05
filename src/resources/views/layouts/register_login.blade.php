@@ -22,6 +22,7 @@
     <div class="container">
         @yield('content')
     </div>
+    @yield('scripts')
     @livewireScripts
 </body>
 </html>
