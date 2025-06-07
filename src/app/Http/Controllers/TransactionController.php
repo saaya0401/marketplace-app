@@ -18,9 +18,10 @@ class TransactionController extends Controller
         $self=$user->profile;
         $purchase=Purchase::where('item_id', $itemId)->first();
         $buyer=$purchase->profile;
+        $status=$self->id === $purchase->profile->id ? 'buyer_status' : 'seller_status';
 
         TransactionMessage::where('purchase_id', $purchase->id)->where('user_id', '!=', $user->id)->where('is_read', false)->update(['is_read'=>true]);
-        $transactions=Purchase::where('status', 'in_progress')->where('item_id', '!=', $itemId)->where(function($query) use ($user, $self){
+        $transactions=Purchase::where($status, 'in_progress')->where('item_id', '!=', $itemId)->where(function($query) use ($user, $self){
             $query->whereIn('item_id', function ($q) use ($user, $self){
                 $q->select('id')->from('items')->where('user_id', $user->id);
             })->orWhere('profile_id', $self->id);
@@ -50,9 +51,5 @@ class TransactionController extends Controller
         $messageId=$request->input('id');
         TransactionMessage::find($messageId)?->delete();
         return redirect('/transaction/' . $itemId);
-    }
-
-    public function complete($itemId){
-
     }
 }

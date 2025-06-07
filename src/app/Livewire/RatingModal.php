@@ -18,7 +18,7 @@ class RatingModal extends Component
     public function mount(Item $item){
         $this->item=$item;
         $this->rating=3;
-        if(Auth::id() === $item->user_id && $item->purchase && $item->purchase->status === 'completed' ){
+        if(Auth::id() === $item->user_id && $item->purchase && $item->purchase->buyer_status === 'completed' ){
             $this->showModal=true;
         }
     }
@@ -49,9 +49,13 @@ class RatingModal extends Component
             'rating'=>$this->rating
         ]);
 
-        $purchase->update(['status'=>'completed']);
-
         $seller=$this->item->user;
+        if($user->id === $seller->id){
+            $purchase->update(['seller_status'=>'completed']);
+        }else{
+            $purchase->update(['buyer_status'=>'completed']);
+        }
+
         if($seller !== $user){
             Mail::to($seller->email)->send(new PurchaseCompleted($this->item));
         }

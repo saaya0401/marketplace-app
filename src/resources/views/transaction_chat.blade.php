@@ -134,9 +134,15 @@
         const itemId="{{ $item->id }}";
         const key = 'chat_draft_body_' + itemId;
 
-        const savedText = sessionStorage.getItem(key);
-        if (savedText) {
-            textarea.value = savedText;
+        const oldText=@json(old('body'));
+        if(oldText){
+            sessionStorage.setItem(key, oldText);
+            textarea.value=oldText;
+        }else{
+            const savedText = sessionStorage.getItem(key);
+            if (savedText) {
+                textarea.value = savedText;
+            }
         }
 
         textarea.addEventListener('input', function () {

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('profile_id')->constrained()->cascadeOnDelete();
             $table->foreignId('item_id')->constrained()->cascadeOnDelete();
             $table->string('payment_method');
-            $table->enum('status',  ['in_progress', 'completed'])->default('in_progress');
+            $table->enum('buyer_status',  ['in_progress', 'completed'])->default('in_progress');
+            $table->enum('seller_status',  ['in_progress', 'completed'])->default('in_progress');
             $table->timestamps();
         });
     }
