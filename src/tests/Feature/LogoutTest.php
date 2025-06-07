@@ -22,7 +22,8 @@ class LogoutTest extends TestCase
 
         $response=$this->post('/login', [
             'email'=>'test@example.com',
-            'password'=>'password123'
+            'password'=>'password123',
+            '_token'=>csrf_token(),
         ]);
 
         $user=User::where('email', 'test@example.com')->first();
@@ -34,7 +35,7 @@ class LogoutTest extends TestCase
         ]));
         $response->assertRedirect('/');
 
-        $response=$this->post('/logout');
+        $response=$this->withoutMiddleware()->post('/logout');
         $this->assertFalse(auth()->check());
         $response->assertRedirect('/');
     }

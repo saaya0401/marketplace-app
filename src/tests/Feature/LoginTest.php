@@ -17,7 +17,8 @@ class LoginTest extends TestCase
 
         $response=$this->post('/login', [
             'email'=>'',
-            'password'=>'password123'
+            'password'=>'password123',
+            '_token'=>csrf_token(),
         ]);
         $response->assertSessionHasErrors(['email'=>'メールアドレスを入力してください']);
     }
@@ -28,7 +29,8 @@ class LoginTest extends TestCase
 
         $response=$this->post('/login', [
             'email'=>'test@example.com',
-            'password'=>''
+            'password'=>'',
+            '_token'=>csrf_token(),
         ]);
         $response->assertSessionHasErrors(['password'=>'パスワードを入力してください']);
     }
@@ -44,7 +46,8 @@ class LoginTest extends TestCase
 
         $response=$this->post('login', [
             'email'=>'test@example.com',
-            'password'=>'password111'
+            'password'=>'password111',
+            '_token'=>csrf_token(),
         ]);
         $response->assertSessionHasErrors(['email'=>'ログイン情報が登録されていません']);
     }
@@ -60,7 +63,8 @@ class LoginTest extends TestCase
 
         $response=$this->post('/login', [
             'email'=>'test@example.com',
-            'password'=>'password123'
+            'password'=>'password123',
+            '_token'=>csrf_token(),
         ]);
 
         $user=User::where('email', 'test@example.com')->first();

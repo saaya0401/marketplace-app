@@ -36,7 +36,8 @@ class SellTest extends TestCase
             'description'=>'食べ物ではありません',
             'image'=>'item-img/Love.png',
             'price'=>1000,
-            'categories'=>$categoryIds
+            'categories'=>$categoryIds,
+            '_token'=>csrf_token(),
         ];
 
         $response=$this->post('/sell', $itemData);

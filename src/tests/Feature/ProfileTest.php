@@ -21,30 +21,12 @@ class ProfileTest extends TestCase
     }
 
     public function testProfile(){
-        $user=User::where('email', 'saaya@example.com')->first();
+        $user=User::where('email', 'koharu@example.com')->first();
         $this->assertNotNull($user);
         $this->actingAs($user);
         $profile=Profile::where('user_id', $user->id)->first();
 
-        Purchase::insert([
-            [
-                'profile_id'=>$profile->id,
-                'item_id'=>Item::find(2)->id,
-                'payment_method'=>'カード払い'
-            ],
-            [
-                'profile_id'=>$profile->id,
-                'item_id'=>Item::find(5)->id,
-                'payment_method'=>'カード払い'
-            ],
-            [
-                'profile_id'=>$profile->id,
-                'item_id'=>Item::find(3)->id,
-                'payment_method'=>'カード払い'
-            ],
-        ]);
-        $purchases=Purchase::all();
-
+        $purchases=Purchase::where('profile_id', $profile)->get();
         $response=$this->get('/mypage');
         $response->assertStatus(200);
         if($profile->profile_image){
