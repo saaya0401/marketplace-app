@@ -67,8 +67,11 @@ STRIPE_SECRET=sk_test_51QsIBBGCkm4oaUW7rsfBWuStvboPUrYlEtmIBGj3I9XgXxrJyjbpd0dlY
 4. CREATE DATABASE demo_test;
 ```
 2. docker-compose exec php bash
-1. php artisan config:cache
 1. php artisan config:clear
+1. php artisan key:generate --env=testing
+1. php artisan migrate --env=testing
+1. php artisan config:cache
+1. php artisan test
 
 *php artisan test でまとめてテストするとエラーになる場合は個別にテストしてください
 
