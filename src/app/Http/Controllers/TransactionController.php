@@ -18,14 +18,19 @@ class TransactionController extends Controller
         $self=$user->profile;
         $purchase=Purchase::where('item_id', $itemId)->first();
         $buyer=$purchase->profile;
-        $status=$self->id === $purchase->profile->id ? 'buyer_status' : 'seller_status';
 
         TransactionMessage::where('purchase_id', $purchase->id)->where('user_id', '!=', $user->id)->where('is_read', false)->update(['is_read'=>true]);
-        $transactions=Purchase::where($status, 'in_progress')->where('item_id', '!=', $itemId)->where(function($query) use ($user, $self){
-            $query->whereIn('item_id', function ($q) use ($user, $self){
-                $q->select('id')->from('items')->where('user_id', $user->id);
-            })->orWhere('profile_id', $self->id);
-        })->get();
+
+        $userItemIds=Item::where('user_id', $user->id)->pluck('id');
+        $transactions=Purchase::where('item_id', '!=', $itemId)->where(function($query) use ($userItemIds, $self){
+            $query->where(function ($q) use ($userItemIds){
+                    $q->whereIn('item_id', $userItemIds)->where('seller_status', 'in_progress');
+                })
+                ->orWhere(function ($q) use ($self){
+                    $q->where('profile_id', $self->id)->where('buyer_status', 'in_progress');
+                });
+        })->with('item')->get();
+
         $transactionMessages=TransactionMessage::where('purchase_id', $purchase->id)->orderBy('created_at', 'asc')->get();
         return view('transaction_chat', compact('item', 'self', 'buyer', 'transactions', 'transactionMessages'));
     }

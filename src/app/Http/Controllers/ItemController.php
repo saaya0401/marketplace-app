@@ -76,6 +76,7 @@ class ItemController extends Controller
                 return optional($purchase->transactionMessages->last())->created_at;
             })->values();
         }
+
         $status=Purchase::where('profile_id', $profile->id)->exists() ? 'buyer_status' : 'seller_status';
         $unreadCountAll=TransactionMessage::whereHas('purchase', function ($query) use ($status, $user, $profile){
             $query->where($status, 'in_progress')->where(function ($q) use ($user, $profile){

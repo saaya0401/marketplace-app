@@ -56,14 +56,14 @@ class SearchTest extends TestCase
         $response=$this->get('/item/search?keyword=' . $keyword);
         $response->assertStatus(200);
 
-        $searchItems=Item::query()->KeywordSearch($keyword)->get();
-        $response->assertViewHas('items', function($items) use ($searchItems){
-            return $items->count() === $searchItems->count() && $items->pluck('title')->first() === $searchItems->pluck('title')->first();
+        $expectedItems=Item::where('title', 'like', "%{$keyword}%")->where('user_id', '!=', $user->id)->get();
+        $response->assertViewHas('items', function($items) use ($expectedItems){
+            return $items->count() === $expectedItems->count() && $items->pluck('title')->first() === $expectedItems->pluck('title')->first();
         });
 
         $mylists=Mylist::where('user_id', $user->id)->with('item')->get();
-        $mylistItems = $mylists->pluck('item')->filter(function ($item) use ($searchItems) {
-            return $searchItems->pluck('id')->contains($item->id);
+        $mylistItems = $mylists->pluck('item')->filter(function ($item) use ($expectedItems) {
+            return $expectedItems->pluck('id')->contains($item->id);
         });
 
         $response=$this->get('/item/search?tab=mylist&keyword=' . $keyword);

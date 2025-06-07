@@ -91,7 +91,7 @@ STRIPE_SECRET=sk_test_51QsIBBGCkm4oaUW7rsfBWuStvboPUrYlEtmIBGj3I9XgXxrJyjbpd0dlY
 ## 使用技術
 - MySQL 8.0.26
 - PHP 8.2-fpm
-- Laravel 11.39.0
+- Laravel 11
 
 ## ER図
 ![image](marketplace-app.drawio.png)

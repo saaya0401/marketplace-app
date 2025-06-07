@@ -23,7 +23,7 @@ class MylistTest extends TestCase
         parent::setUp();
         $this->seed();
 
-        $this->user=User::where('email', 'saaya@example.com')->first();
+        $this->user=User::where('email', 'koharu@example.com')->first();
         $this->assertNotNull($this->user);
 
         $this->actingAs($this->user);
@@ -109,7 +109,8 @@ class MylistTest extends TestCase
     }
 
     public function testGuestUserMylist(){
-        $response=$this->post('/logout');
+        $response = $this->withoutMiddleware()->post('/logout');
+
         $this->assertFalse(auth()->check());
         $response->assertRedirect('/');
 

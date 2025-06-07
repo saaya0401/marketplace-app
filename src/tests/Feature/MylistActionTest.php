@@ -34,7 +34,7 @@ class MylistActionTest extends TestCase
 
         $beforeCount=Mylist::where('item_id', $this->item->id)->count();
 
-        $response=$this->post(url('/mylist/' . $this->item->id));
+        $response=$this->withoutMiddleware()->post(url('/mylist/' . $this->item->id));
         $response->assertStatus(302);
         $response->assertRedirect(url('/item/' . $this->item->id));
 
@@ -49,7 +49,7 @@ class MylistActionTest extends TestCase
 
         $response->assertSee('src="http://localhost/icon/star.png"', false);
 
-        $response=$this->post(url('/mylist/' . $this->item->id));
+        $response=$this->withoutMiddleware()->post(url('/mylist/' . $this->item->id));
         $response->assertStatus(302);
         $response->assertRedirect(url('/item/' . $this->item->id));
         $response=$this->get(url('/item/' . $this->item->id));
@@ -69,7 +69,7 @@ class MylistActionTest extends TestCase
 
         $beforeCount=Mylist::where('item_id', $this->item->id)->count();
 
-        $response=$this->post(url('/mylist/' . $this->item->id));
+        $response=$this->withoutMiddleware()->post(url('/mylist/' . $this->item->id));
         $response->assertStatus(302);
         $response->assertRedirect(url('/item/' . $this->item->id));
         $response=$this->get(url('/item/' . $this->item->id));

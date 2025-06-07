@@ -37,7 +37,8 @@ class CommentTest extends TestCase
         $response=$this->post(url('/comment/' . $this->item->id), [
             'item_id'=>$this->item->id,
             'profile_id'=>$this->profile->id,
-            'content'=>'コメント'
+            'content'=>'コメント',
+            '_token'=>csrf_token(),
         ]);
         $response->assertStatus(302);
         $response->assertRedirect(url('/item/' . $this->item->id));
@@ -58,7 +59,8 @@ class CommentTest extends TestCase
         $response=$this->post(url('/comment/' . $this->item->id), [
             'item_id'=>$this->item->id,
             'profile_id'=>$this->profile->id,
-            'content'=>'コメント'
+            'content'=>'コメント',
+            '_token'=>csrf_token(),
         ]);
 
         $response->assertRedirect('/login');
@@ -73,7 +75,8 @@ class CommentTest extends TestCase
         $response=$this->post(url('/comment/' . $this->item->id), [
             'item_id'=>$this->item->id,
             'profile_id'=>$this->profile->id,
-            'content'=>''
+            'content'=>'',
+            '_token'=>csrf_token(),
         ]);
         $response->assertSessionHasErrors(['content'=>'商品コメントを入力してください']);
     }
@@ -83,7 +86,8 @@ class CommentTest extends TestCase
         $response=$this->post(url('/comment/' . $this->item->id), [
             'item_id'=>$this->item->id,
             'profile_id'=>$this->profile->id,
-            'content'=>$content
+            'content'=>$content,
+            '_token'=>csrf_token(),
         ]);
         $response->assertSessionHasErrors(['content'=>'商品コメントは255文字以下で入力してください']);
     }
