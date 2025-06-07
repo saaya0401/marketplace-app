@@ -77,9 +77,8 @@ class ItemController extends Controller
             })->values();
         }
 
-        $status=Purchase::where('profile_id', $profile->id)->exists() ? 'buyer_status' : 'seller_status';
-        $unreadCountAll=TransactionMessage::whereHas('purchase', function ($query) use ($status, $user, $profile){
-            $query->where($status, 'in_progress')->where(function ($q) use ($user, $profile){
+        $unreadCountAll=TransactionMessage::whereHas('purchase', function ($query) use ($user, $profile){
+            $query->where(function ($q) use ($user, $profile){
                 $q->where('profile_id', $profile->id)->orWhereHas('item', function ($q2) use ($user){
                     $q2->where('user_id', $user->id);
                 });
