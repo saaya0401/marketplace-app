@@ -32,13 +32,7 @@
                     </span>」さんとの取引画面
                 </h2>
             </div>
-            @if(Auth::id() !== $item->user->id)
-            <form action="" method="post" class="complete-button">
-                @csrf
-                @method('patch')
-                <button class="complete-form__button">取引を完了する</button>
-            </form>
-            @endif
+                @livewire('rating-modal', ['item'=>$item])
         </div>
         <div class="transaction-item">
             <img src="{{ Storage::url($item->image) }}" alt="商品画像" class="transaction-item__image">
@@ -74,17 +68,33 @@
                         <h6 class="chat__user-name">{{ $self->user->name }}</h6>
                         <img src="{{ Storage::url($self->profile_image) }}" alt="アイコン" class="chat__user-image">
                     </div>
-                    <form class="chat-message__form">
-                        @csrf
-                        <input type="text" class="chat-message__input" placeholder="{{ $transactionMessage->body }}">
-                        @if($transactionMessage->message_image)
-                            <img src="{{ Storage::url($transactionMessage->message_image) }}" alt="画像" class="message-img">
-                        @endif
-                        <div class="chat-message__button">
-                            <button class="chat-message__button-action" formaction="" formmethod="">編集</button>
-                            <button class="chat-message__button-action" formaction="" formmethod="">削除</button>
-                        </div>
-                    </form>
+                    @if($transactionMessage->message_image)
+                        <img src="{{ Storage::url($transactionMessage->message_image) }}" alt="画像" class="message-img">
+                    @endif
+                    <div class="message-form__area">
+                        <form class="chat-message__form" method="post" action="{{ url('/message/edit/' . $item->id) }}">
+                            @csrf
+                            @method('PATCH')
+                            <input type="text" class="chat-message__input" name="edit_body" placeholder="{{ $transactionMessage->body }}">
+                            <input type="hidden" name="id" value="{{ $transactionMessage->id }}">
+                            <div class="chat-message__button">
+                                @if(old('id') == $transactionMessage->id)
+                                <div class="form-error">
+                                    @error('edit_body')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                                @endif
+                                <button class="chat-message__button-action" type="submit">編集</button>
+                            </div>
+                        </form>
+                        <form class="chat-message__button-delete" action="{{ url('/message/delete/' . $item->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="id" value="{{ $transactionMessage->id }}">
+                            <button class="chat-message__button-action" type="submit">削除</button>
+                        </form>
+                    </div>
                 </div>
             @endif
             @endforeach
@@ -109,7 +119,7 @@
             @livewire('chat-message-image')
             <input type="hidden" name="user_id" value="{{ $self->user->id }}">
             <input type="hidden" name="purchase_id" value="{{ $item->purchase->id }}">
-            <button class="message-form__button">
+            <button class="message-form__button" type="submit">
                 <img src="{{ asset('/icon/send.png') }}" alt="" class="message-form__button-image">
             </button>
         </form>

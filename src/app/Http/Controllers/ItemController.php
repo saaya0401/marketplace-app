@@ -15,6 +15,7 @@ use App\Models\Comment;
 use App\Models\Purchase;
 use App\Models\Condition;
 use App\Models\TransactionMessage;
+use App\Models\Rating;
 
 class ItemController extends Controller
 {
@@ -52,6 +53,7 @@ class ItemController extends Controller
         $averageRating=round($user->receivedRatings()->avg('rating' ?? 0));
         $tab=$request->query('tab', 'sell');
         $purchases=collect();
+        $ratingPurchaseIds=Rating::where('from_user_id', $user->id)->pluck('purchase_id')->toArray();
         if($tab ==='buy'){
             $purchases=Purchase::where('profile_id', $profile->id)->with('item', 'transactionMessages')->get();
             $items=$purchases;
@@ -64,7 +66,7 @@ class ItemController extends Controller
                 }
             ])->get();
             $sellItemIds=Item::where('user_id', $user->id)->pluck('id');
-            $sellSide=Purchase::whereIn('item_id', $sellItemIds)->with(['item', 'transactionMessages'])->withCount([
+            $sellSide=Purchase::whereIn('item_id', $sellItemIds)->whereNotIn('id', $ratingPurchaseIds)->with(['item', 'transactionMessages'])->withCount([
                 'transactionMessages as unreadCount'=>function($query) use ($user){
                     $query->where('user_id', '!=', $user->id)->where('is_read', false);
                 }

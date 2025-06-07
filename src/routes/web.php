@@ -31,5 +31,8 @@ Route::middleware('auth')->group(function (){
     Route::post('/comment/{itemId}', [ItemController::class, 'comment']);
     Route::post('/mylist/{itemId}', [ItemController::class, 'mylist']);
     Route::get('/transaction/{itemId}', [TransactionController::class, 'chatView']);
+    Route::patch('/message/edit/{itemId}', [TransactionController::class, 'messageEdit']);
+    Route::delete('/message/delete/{itemId}', [TransactionController::class, 'messageDelete']);
+    Route::patch('/transaction/complete/{itemId}', [TransactionController::class, 'complete']);
 });
 Route::get('/item/{itemId}', [ItemController::class, 'detail']);
