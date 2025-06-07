@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Purchase extends Model
 {
-    protected $fillable=['profile_id', 'item_id', 'payment_method', 'status'];
+    protected $fillable=['profile_id', 'item_id', 'payment_method', 'buyer_status', 'seller_status'];
 
     public function profile(){
         return $this->belongsTo(Profile::class);

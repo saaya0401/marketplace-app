@@ -60,7 +60,7 @@ class ItemController extends Controller
         }elseif($tab === 'sell'){
             $items=Item::where('user_id', '=', $user->id)->get();
         }else{
-            $buySide=Purchase::where('profile_id', $profile->id)->where('status', 'in_progress')->with(['item', 'transactionMessages'])->withCount([
+            $buySide=Purchase::where('profile_id', $profile->id)->where('buyer_status', 'in_progress')->with(['item', 'transactionMessages'])->withCount([
                 'transactionMessages as unreadCount'=>function ($query) use ($user){
                     $query->where('user_id', '!=', $user->id)->where('is_read', false);
                 }
@@ -76,8 +76,9 @@ class ItemController extends Controller
                 return optional($purchase->transactionMessages->last())->created_at;
             })->values();
         }
-        $unreadCountAll=TransactionMessage::whereHas('purchase', function ($query) use ($user, $profile){
-            $query->where('status', 'in_progress')->where(function ($q) use ($user, $profile){
+        $status=Purchase::where('profile_id', $profile->id)->exists() ? 'buyer_status' : 'seller_status';
+        $unreadCountAll=TransactionMessage::whereHas('purchase', function ($query) use ($status, $user, $profile){
+            $query->where($status, 'in_progress')->where(function ($q) use ($user, $profile){
                 $q->where('profile_id', $profile->id)->orWhereHas('item', function ($q2) use ($user){
                     $q2->where('user_id', $user->id);
                 });

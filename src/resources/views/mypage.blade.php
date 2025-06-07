@@ -64,13 +64,3 @@
     @endforeach
 </div>
 @endsection
-
-@section('scripts')
-<script>
-    window.addEventListener('pageshow', function(event){
-        if(event.persisted){
-            window.location.reload();
-        }
-    });
-</script>
-@endsection

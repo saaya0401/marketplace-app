@@ -18,37 +18,43 @@ class PurchaseTableSeeder extends Seeder
                 'profile_id'=>1,
                 'item_id'=>6,
                 'payment_method'=>'card',
-                'status'=>'in_progress'
+                'buyer_status'=>'in_progress',
+                'seller_status'=>'in_progress'
             ],
             [
                 'profile_id'=>2,
                 'item_id'=>1,
                 'payment_method'=>'card',
-                'status'=>'in_progress'
+                'buyer_status'=>'in_progress',
+                'seller_status'=>'in_progress'
             ],
             [
                 'profile_id'=>3,
                 'item_id'=>2,
                 'payment_method'=>'card',
-                'status'=>'in_progress'
+                'buyer_status'=>'in_progress',
+                'seller_status'=>'in_progress'
             ],
             [
                 'profile_id'=>3,
                 'item_id'=>3,
                 'payment_method'=>'card',
-                'status'=>'in_progress'
+                'buyer_status'=>'in_progress',
+                'seller_status'=>'in_progress'
             ],
             [
                 'profile_id'=>3,
                 'item_id'=>7,
                 'payment_method'=>'card',
-                'status'=>'in_progress'
+                'buyer_status'=>'in_progress',
+                'seller_status'=>'in_progress'
             ],
             [
                 'profile_id'=>3,
                 'item_id'=>8,
                 'payment_method'=>'card',
-                'status'=>'in_progress'
+                'buyer_status'=>'in_progress',
+                'seller_status'=>'in_progress'
             ],
         ];
 
