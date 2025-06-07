@@ -23,5 +23,8 @@ class DatabaseSeeder extends Seeder
 
         \DB::commit();
         $this->call(ItemTableSeeder::class);
+
+        \DB::commit();
+        $this->call(PurchaseTableSeeder::class);
     }
 }

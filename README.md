@@ -53,6 +53,10 @@ STRIPE_SECRET=sk_test_51QsIBBGCkm4oaUW7rsfBWuStvboPUrYlEtmIBGj3I9XgXxrJyjbpd0dlY
 - 日付: 任意の将来の日付
 - セキュリティコード: 任意の3桁の数字
 
+## URL
+- 環境開発: http://localhost/
+- phpMyAdmin: http://localhost:8080/
+- MailHog: http://localhost:8025
 
 ## テスト手順
 1. テスト用データベースの作成
@@ -88,11 +92,6 @@ STRIPE_SECRET=sk_test_51QsIBBGCkm4oaUW7rsfBWuStvboPUrYlEtmIBGj3I9XgXxrJyjbpd0dlY
 - MySQL 8.0.26
 - PHP 8.2-fpm
 - Laravel 11.39.0
-
-## URL
-- 環境開発: http://localhost/
-- phpMyAdmin: http://localhost:8080/
-- MailHog: http://localhost:8025
 
 ## ER図
 ![image](marketplace-app.drawio.png)
