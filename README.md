@@ -36,9 +36,17 @@ STRIPE_SECRET=sk_test_51QsIBBGCkm4oaUW7rsfBWuStvboPUrYlEtmIBGj3I9XgXxrJyjbpd0dlY
 1. php artisan db:seed
 1. php artisan config:cache
 
-## userのログイン用初期データ
+## 前半の商品を出品したユーザのログインデータ
 - メールアドレス: saaya@example.com
 - パスワード: saayakoba
+
+## 後半の商品を出品したユーザのログインデータ
+- メールアドレス: hiyori@example.com
+- パスワード: hiyorikoba
+
+## 商品を出品していないユーザのログインデータ
+- メールアドレス: koharu@example.com
+- パスワード: koharukoba
 
 ## カード払いのテストカード
 - 番号: 4242 4242 4242 4242
